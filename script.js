@@ -1,8 +1,9 @@
 const state = {
   lang: localStorage.getItem("gg-lang") || "fr",
   theme:
-    localStorage.getItem("gg-theme") ||
-    (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"),
+    localStorage.getItem("gg-theme-user-set") === "true"
+      ? localStorage.getItem("gg-theme") || "light"
+      : "light",
   galleryFilter: "all",
   testimonialIndex: 0,
   enabledSections: {
@@ -647,6 +648,7 @@ function setTheme(theme) {
   state.theme = theme;
   document.documentElement.dataset.theme = theme;
   localStorage.setItem("gg-theme", theme);
+  localStorage.setItem("gg-theme-user-set", "true");
   const nextActionLabel = theme === "dark" ? t("modeLightLabel") : t("modeDarkLabel");
   document.getElementById("theme-toggle-label").textContent = nextActionLabel;
   document.getElementById("theme-toggle").setAttribute("aria-label", nextActionLabel);
