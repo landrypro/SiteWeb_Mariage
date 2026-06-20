@@ -8,7 +8,7 @@
       name="description"
       content="Site de mariage chrétien de Grégoire & Gregorine. Retrouvez le programme, les informations pratiques, la galerie, le RSVP et les contacts utiles pour le 07 novembre 2026 à Douala."
     />
-    <meta name="theme-color" content="#A7D8F0" />
+    <meta name="theme-color" content="#C96A3A" />
     <meta property="og:title" content="Grégoire & Gregorine — 07 Novembre 2026" />
     <meta
       property="og:description"
@@ -19,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Nunito+Sans:wght@300;400;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
@@ -41,14 +41,8 @@
           }
         },
         "organizer": [
-          {
-            "@type": "Person",
-            "name": "Grégoire"
-          },
-          {
-            "@type": "Person",
-            "name": "Gregorine"
-          }
+          { "@type": "Person", "name": "Grégoire" },
+          { "@type": "Person", "name": "Gregorine" }
         ]
       }
     </script>
@@ -56,12 +50,11 @@
   <body>
     <div class="page-shell">
       <header class="site-header">
-        <div class="container header-row">
+        <div class="container nav-wrap">
           <a class="brand" href="#accueil" aria-label="Retour en haut de page">
-            <span class="brand-mark">G&G</span>
+            <span class="brand-icon" aria-hidden="true">♥</span>
             <span class="brand-copy">
-              <strong>Grégoire & Gregorine</strong>
-              <small data-i18n="brandSubtitle">07 Novembre 2026 • Douala</small>
+              <strong>Grégoire <span>&amp;</span> Gregorine</strong>
             </span>
           </a>
 
@@ -69,13 +62,23 @@
             <a href="#accueil" data-i18n="navHome">Accueil</a>
             <a href="#histoire" data-i18n="navStory">Notre histoire</a>
             <a href="#programme" data-i18n="navProgram">Programme</a>
-            <a href="#rsvp" data-i18n="navRsvp">RSVP</a>
+            <a href="#dress-code">Dress code</a>
+            <a href="#galerie">Galerie</a>
+            <a href="#infos">Infos</a>
             <a href="#contacts" data-i18n="navContacts">Contacts</a>
           </nav>
 
           <div class="header-actions">
             <button
-              class="icon-button"
+              class="header-pill"
+              id="language-toggle"
+              type="button"
+              aria-label="Switch language"
+            >
+              EN
+            </button>
+            <button
+              class="header-icon"
               id="theme-toggle"
               type="button"
               aria-label="Activer le mode sombre"
@@ -83,16 +86,8 @@
             >
               <span id="theme-toggle-label">Mode sombre</span>
             </button>
-            <button
-              class="pill-toggle"
-              id="language-toggle"
-              type="button"
-              aria-label="Switch language"
-            >
-              FR / EN
-            </button>
             <a class="button button-primary header-rsvp" href="#rsvp" data-i18n="ctaRsvp">
-              Confirmer ma présence
+              Confirmer
             </a>
           </div>
         </div>
@@ -103,107 +98,78 @@
         href="https://wa.me/237600000000?text=Bonjour%2C%20je%20souhaite%20obtenir%20de%20l%27aide%20pour%20le%20mariage%20de%20Gr%C3%A9goire%20et%20Gregorine."
         target="_blank"
         rel="noreferrer"
-        data-i18n="whatsappFloating"
+        aria-label="WhatsApp"
       >
-        Assistance WhatsApp
+        WA
       </a>
 
-      <a class="floating-rsvp" href="#rsvp" data-i18n="floatingRsvp">RSVP</a>
-
       <main>
-        <section class="hero section" id="accueil">
-          <div class="container hero-grid">
-            <div class="hero-copy">
-              <p class="eyebrow" data-i18n="heroKicker">Mariage chrétien</p>
-              <h1>Grégoire & Gregorine</h1>
-              <p class="hero-subtitle" data-i18n="heroSubtitle">
-                Nous célébrons notre union devant Dieu, nos familles et nos amis.
-              </p>
+        <section class="hero" id="accueil">
+          <div class="hero-media" aria-hidden="true"></div>
+          <div class="hero-overlay" aria-hidden="true"></div>
 
-              <div class="hero-details">
-                <span class="detail-chip" data-i18n="heroDate">
-                  07 Novembre 2026 — Douala, Cameroun
-                </span>
-                <span class="detail-chip" data-i18n="heroMood">Foi • Famille • Joie</span>
-              </div>
+          <div class="container hero-inner">
+            <p class="hero-date font-display" data-i18n="heroDate">
+              07 Novembre 2026 — Douala, Cameroun
+            </p>
 
-              <blockquote class="verse-card">
-                <p data-i18n="heroVerse">
-                  “L’amour est patient, il est plein de bonté.”
-                </p>
-                <cite data-i18n="heroVerseRef">1 Corinthiens 13:4</cite>
-              </blockquote>
+            <h1 class="hero-title">
+              <span>Grégoire</span>
+              <em>&amp;</em>
+              <span>Gregorine</span>
+            </h1>
 
-              <div class="hero-actions">
-                <a class="button button-primary" href="#rsvp" data-i18n="ctaRsvp">
-                  Confirmer ma présence
-                </a>
-                <a class="button button-secondary" href="#programme" data-i18n="ctaProgram">
-                  Voir le programme
-                </a>
-              </div>
+            <p class="hero-subtitle" data-i18n="heroSubtitle">
+              Nous célébrons notre union devant Dieu, nos familles et nos amis.
+            </p>
 
-              <div class="countdown-card" aria-labelledby="countdown-title">
-                <div class="section-heading compact">
-                  <p class="eyebrow" data-i18n="countdownEyebrow">Compte à rebours</p>
-                  <h2 id="countdown-title" data-i18n="countdownTitle">
-                    Chaque jour nous rapproche de cette alliance
-                  </h2>
+            <blockquote class="hero-verse">
+              <p data-i18n="heroVerse">“L’amour est patient, il est plein de bonté.”</p>
+              <cite data-i18n="heroVerseRef">1 Corinthiens 13:4</cite>
+            </blockquote>
+
+            <div class="countdown-shell" aria-labelledby="countdown-title">
+              <h2 class="sr-only" id="countdown-title" data-i18n="countdownTitle">
+                Chaque jour nous rapproche de cette alliance
+              </h2>
+              <div class="countdown-grid" role="timer" aria-live="polite">
+                <div class="countdown-item">
+                  <strong id="days">000</strong>
+                  <span data-i18n="countdownDays">Jours</span>
                 </div>
-                <div class="countdown-grid" role="timer" aria-live="polite">
-                  <div class="countdown-item">
-                    <strong id="days">000</strong>
-                    <span data-i18n="countdownDays">Jours</span>
-                  </div>
-                  <div class="countdown-item">
-                    <strong id="hours">00</strong>
-                    <span data-i18n="countdownHours">Heures</span>
-                  </div>
-                  <div class="countdown-item">
-                    <strong id="minutes">00</strong>
-                    <span data-i18n="countdownMinutes">Minutes</span>
-                  </div>
-                  <div class="countdown-item">
-                    <strong id="seconds">00</strong>
-                    <span data-i18n="countdownSeconds">Secondes</span>
-                  </div>
+                <div class="countdown-item">
+                  <strong id="hours">00</strong>
+                  <span data-i18n="countdownHours">Heures</span>
+                </div>
+                <div class="countdown-item">
+                  <strong id="minutes">00</strong>
+                  <span data-i18n="countdownMinutes">Minutes</span>
+                </div>
+                <div class="countdown-item">
+                  <strong id="seconds">00</strong>
+                  <span data-i18n="countdownSeconds">Secondes</span>
                 </div>
               </div>
             </div>
 
-            <div class="hero-visual" aria-label="Espace visuel de présentation du couple">
-              <div class="portrait-panel">
-                <div class="portrait-card">
-                  <span class="portrait-badge" data-i18n="heroPortraitTag">Photo du couple</span>
-                  <div class="portrait-art">
-                    <span class="monogram">G&amp;G</span>
-                  </div>
-                  <div class="portrait-footer">
-                    <strong data-i18n="heroPortraitTitle">Une journée de grâce et de reconnaissance</strong>
-                    <p data-i18n="heroPortraitText">
-                      Remplacez cette zone par votre plus belle photo de fiançailles ou un portrait officiel.
-                    </p>
-                  </div>
-                </div>
-                <div class="floating-note note-primary">
-                  <span data-i18n="heroNoteOneLabel">Bénédiction</span>
-                  <strong data-i18n="heroNoteOneValue">Cérémonie religieuse</strong>
-                </div>
-                <div class="floating-note note-secondary">
-                  <span data-i18n="heroNoteTwoLabel">Réception</span>
-                  <strong data-i18n="heroNoteTwoValue">Cocktail de célébration</strong>
-                </div>
-              </div>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#rsvp" data-i18n="ctaRsvp">
+                Confirmer ma présence
+              </a>
+              <a class="button button-outline" href="#programme" data-i18n="ctaProgram">
+                Voir le programme
+              </a>
             </div>
           </div>
         </section>
 
-        <section class="section section-alt" id="histoire">
-          <div class="container">
-            <div class="section-heading">
+        <section class="section section-soft" id="histoire">
+          <div class="container narrow">
+            <div class="section-heading centered">
+              <span class="section-line"></span>
               <p class="eyebrow" data-i18n="storyEyebrow">Notre histoire</p>
               <h2 data-i18n="storyTitle">Un chemin de foi, d’amitié et d’amour</h2>
-              <p data-i18n="storyIntro">
+              <p class="section-intro font-display" data-i18n="storyIntro">
                 Cette frise a été pensée pour accueillir vos souvenirs clés. Chaque bloc est facilement modifiable pour intégrer les vrais textes du couple.
               </p>
             </div>
@@ -213,15 +179,22 @@
 
         <section class="section" id="programme">
           <div class="container">
-            <div class="section-heading with-action">
-              <div>
-                <p class="eyebrow" data-i18n="programEyebrow">Programme officiel</p>
-                <h2 data-i18n="programTitle">Les temps forts de notre célébration</h2>
-                <p data-i18n="programIntro">
-                  Les horaires et adresses peuvent être affinés au fur et à mesure. Les cartes ci-dessous sont prêtes pour les mises à jour finales.
-                </p>
-              </div>
-              <button class="button button-secondary" id="calendar-download" type="button" data-i18n="calendarButton">
+            <div class="section-heading centered">
+              <span class="section-line"></span>
+              <p class="eyebrow" data-i18n="programEyebrow">Programme officiel</p>
+              <h2 data-i18n="programTitle">Les temps forts de notre célébration</h2>
+              <p class="section-intro font-display" data-i18n="programIntro">
+                Les horaires et adresses peuvent être affinés au fur et à mesure. Les cartes ci-dessous sont prêtes pour les mises à jour finales.
+              </p>
+            </div>
+
+            <div class="program-toolbar">
+              <button
+                class="button button-secondary"
+                id="calendar-download"
+                type="button"
+                data-i18n="calendarButton"
+              >
                 Ajouter au calendrier
               </button>
             </div>
@@ -230,25 +203,13 @@
           </div>
         </section>
 
-        <section class="section section-soft" id="infos">
+        <section class="section section-soft" id="dress-code">
           <div class="container">
-            <div class="section-heading">
-              <p class="eyebrow" data-i18n="faqEyebrow">Informations importantes</p>
-              <h2 data-i18n="faqTitle">Questions fréquentes</h2>
-              <p data-i18n="faqIntro">
-                Une FAQ claire aide les invités à trouver rapidement les réponses essentielles avant le jour J.
-              </p>
-            </div>
-            <div class="faq-list" id="faq-list"></div>
-          </div>
-        </section>
-
-        <section class="section" id="dress-code">
-          <div class="container">
-            <div class="section-heading">
+            <div class="section-heading centered">
+              <span class="section-line"></span>
               <p class="eyebrow" data-i18n="dressEyebrow">Dress code</p>
               <h2 data-i18n="dressTitle">Une élégance douce, lumineuse et harmonieuse</h2>
-              <p data-i18n="dressIntro">
+              <p class="section-intro font-display" data-i18n="dressIntro">
                 Nous vous invitons à vous habiller avec élégance dans des tons doux et chaleureux, en harmonie avec notre thème.
               </p>
             </div>
@@ -270,14 +231,55 @@
           </div>
         </section>
 
-        <section class="section section-alt" id="rsvp">
-          <div class="container rsvp-layout">
-            <div class="section-heading sticky-card">
-              <p class="eyebrow" data-i18n="rsvpEyebrow">RSVP</p>
-              <h2 data-i18n="rsvpTitle">Confirmez votre présence avec simplicité</h2>
-              <p data-i18n="rsvpIntro">
-                Ce formulaire est conçu pour une future connexion à Supabase ou Firebase. Dans cette démo, la soumission est simulée localement afin de valider l’expérience utilisateur.
+        <section class="section" id="galerie">
+          <div class="container">
+            <div class="section-heading centered">
+              <span class="section-line"></span>
+              <p class="eyebrow" data-i18n="galleryEyebrow">Galerie photos</p>
+              <h2 data-i18n="galleryTitle">Souvenirs, préparatifs et moments précieux</h2>
+              <p class="section-intro font-display" data-i18n="galleryIntro">
+                La structure ci-dessous supporte des catégories, une grille responsive et une lightbox élégante pour la consultation des images.
               </p>
+            </div>
+            <div class="filter-row" id="gallery-filters"></div>
+            <div class="gallery-masonry" id="gallery-grid"></div>
+          </div>
+        </section>
+
+        <section class="section section-soft" id="temoignages">
+          <div class="container">
+            <div class="section-heading centered">
+              <span class="section-line"></span>
+              <p class="eyebrow" data-i18n="testimonialsEyebrow">Témoignages</p>
+              <h2 data-i18n="testimonialsTitle">Des paroles de bénédiction autour de nous</h2>
+              <p class="section-intro font-display" data-i18n="testimonialsIntro">
+                Parents, témoins, amis proches et pasteur peuvent partager ici leurs mots d’amour et de foi.
+              </p>
+            </div>
+
+            <div class="testimonial-controls">
+              <button class="header-icon" id="testimonial-prev" type="button" data-i18n-aria-label="testimonialPrev">
+                ‹
+              </button>
+              <button class="header-icon" id="testimonial-next" type="button" data-i18n-aria-label="testimonialNext">
+                ›
+              </button>
+            </div>
+            <div class="testimonial-card" id="testimonial-card" aria-live="polite"></div>
+          </div>
+        </section>
+
+        <section class="section" id="rsvp">
+          <div class="container rsvp-layout">
+            <div class="rsvp-panel">
+              <div class="section-heading left">
+                <span class="section-line"></span>
+                <p class="eyebrow" data-i18n="rsvpEyebrow">RSVP</p>
+                <h2 data-i18n="rsvpTitle">Confirmez votre présence avec simplicité</h2>
+                <p class="section-intro font-display" data-i18n="rsvpIntro">
+                  Ce formulaire est conçu pour une future connexion à Supabase ou Firebase. Dans cette démo, la soumission est simulée localement afin de valider l’expérience utilisateur.
+                </p>
+              </div>
 
               <div class="feature-list">
                 <div>
@@ -323,20 +325,12 @@
 
               <label>
                 <span data-i18n="formDiet">Restrictions alimentaires</span>
-                <textarea
-                  name="diet"
-                  rows="3"
-                  data-i18n-placeholder="formDietPlaceholder"
-                ></textarea>
+                <textarea name="diet" rows="3" data-i18n-placeholder="formDietPlaceholder"></textarea>
               </label>
 
               <label>
                 <span data-i18n="formMessage">Message aux mariés</span>
-                <textarea
-                  name="message"
-                  rows="4"
-                  data-i18n-placeholder="formMessagePlaceholder"
-                ></textarea>
+                <textarea name="message" rows="4" data-i18n-placeholder="formMessagePlaceholder"></textarea>
               </label>
 
               <button class="button button-primary form-submit" type="submit" data-i18n="formSubmit">
@@ -347,52 +341,17 @@
           </div>
         </section>
 
-        <section class="section" id="galerie">
-          <div class="container">
-            <div class="section-heading">
-              <p class="eyebrow" data-i18n="galleryEyebrow">Galerie photos</p>
-              <h2 data-i18n="galleryTitle">Souvenirs, préparatifs et moments précieux</h2>
-              <p data-i18n="galleryIntro">
-                La structure ci-dessous supporte des catégories, une grille responsive et une lightbox élégante pour la consultation des images.
-              </p>
-            </div>
-            <div class="filter-row" id="gallery-filters"></div>
-            <div class="gallery-masonry" id="gallery-grid"></div>
-          </div>
-        </section>
-
-        <section class="section section-soft" id="temoignages">
-          <div class="container">
-            <div class="section-heading with-action">
-              <div>
-                <p class="eyebrow" data-i18n="testimonialsEyebrow">Témoignages</p>
-                <h2 data-i18n="testimonialsTitle">Des paroles de bénédiction autour de nous</h2>
-                <p data-i18n="testimonialsIntro">
-                  Parents, témoins, amis proches et pasteur peuvent partager ici leurs mots d’amour et de foi.
-                </p>
-              </div>
-              <div class="carousel-controls">
-                <button class="icon-button" id="testimonial-prev" type="button" data-i18n-aria-label="testimonialPrev">
-                  ‹
-                </button>
-                <button class="icon-button" id="testimonial-next" type="button" data-i18n-aria-label="testimonialNext">
-                  ›
-                </button>
-              </div>
-            </div>
-            <div class="testimonial-card" id="testimonial-card" aria-live="polite"></div>
-          </div>
-        </section>
-
-        <section class="section" id="cadeaux" data-feature="gifts">
+        <section class="section section-soft" id="cadeaux" data-feature="gifts">
           <div class="container gifts-layout">
-            <div class="section-heading compact">
+            <div class="section-heading centered">
+              <span class="section-line"></span>
               <p class="eyebrow" data-i18n="giftEyebrow">Cadeaux et soutien</p>
               <h2 data-i18n="giftTitle">Votre présence est le plus beau des cadeaux</h2>
-              <p data-i18n="giftIntro">
+              <p class="section-intro font-display" data-i18n="giftIntro">
                 Cette section peut être activée ou désactivée depuis l’administration selon les souhaits du couple.
               </p>
             </div>
+
             <div class="gift-cards">
               <article class="glass-card">
                 <span class="card-tag" data-i18n="giftOptionOneTag">Option 1</span>
@@ -412,17 +371,20 @@
           </div>
         </section>
 
-        <section class="section section-alt" id="voyage">
+        <section class="section" id="voyage">
           <div class="container">
-            <div class="section-heading">
+            <div class="section-heading centered">
+              <span class="section-line"></span>
               <p class="eyebrow" data-i18n="travelEyebrow">Hébergement & voyage</p>
               <h2 data-i18n="travelTitle">Accueillir au mieux les invités venant de l’extérieur</h2>
-              <p data-i18n="travelIntro">
+              <p class="section-intro font-display" data-i18n="travelIntro">
                 Hôtels, transports, carte et assistance WhatsApp peuvent être regroupés dans cette section pratique.
               </p>
             </div>
+
             <div class="travel-layout">
               <div class="hotel-grid" id="hotel-grid"></div>
+
               <aside class="travel-sidebar">
                 <article class="map-card">
                   <span class="card-tag" data-i18n="travelMapTag">Carte interactive</span>
@@ -459,15 +421,31 @@
           </div>
         </section>
 
+        <section class="section section-soft" id="infos">
+          <div class="container narrow">
+            <div class="section-heading centered">
+              <span class="section-line"></span>
+              <p class="eyebrow" data-i18n="faqEyebrow">Informations importantes</p>
+              <h2 data-i18n="faqTitle">Questions fréquentes</h2>
+              <p class="section-intro font-display" data-i18n="faqIntro">
+                Une FAQ claire aide les invités à trouver rapidement les réponses essentielles avant le jour J.
+              </p>
+            </div>
+            <div class="faq-list" id="faq-list"></div>
+          </div>
+        </section>
+
         <section class="section" id="contacts">
           <div class="container">
-            <div class="section-heading">
+            <div class="section-heading centered">
+              <span class="section-line"></span>
               <p class="eyebrow" data-i18n="contactsEyebrow">Contacts utiles</p>
               <h2 data-i18n="contactsTitle">Le bon contact au bon moment</h2>
-              <p data-i18n="contactsIntro">
+              <p class="section-intro font-display" data-i18n="contactsIntro">
                 Une présentation claire des responsables rassure les invités et fluidifie l’organisation le jour J.
               </p>
             </div>
+
             <div class="contacts-grid" id="contacts-grid"></div>
             <div class="emergency-banner">
               <div>
@@ -489,50 +467,35 @@
       </main>
 
       <footer class="site-footer">
-        <div class="container footer-grid">
-          <div>
-            <p class="eyebrow" data-i18n="footerEyebrow">Verset biblique</p>
-            <blockquote class="footer-verse">
-              <p data-i18n="footerVerse">
-                “Ce que Dieu a uni, que l’homme ne le sépare pas.”
-              </p>
-              <cite data-i18n="footerVerseRef">Marc 10:9</cite>
-            </blockquote>
-          </div>
-
+        <div class="container footer-inner">
+          <h2 class="footer-brand">Grégoire <span>&amp;</span> Gregorine</h2>
+          <p class="footer-copy" data-i18n="footerThanks">
+            Nous remercions Dieu pour cette merveilleuse étape de notre vie.
+          </p>
+          <p class="footer-verse">
+            <span data-i18n="footerVerse">“Ce que Dieu a uni, que l’homme ne le sépare pas.”</span>
+            <small data-i18n="footerVerseRef">Marc 10:9</small>
+          </p>
           <div class="footer-links">
             <a href="#accueil" data-i18n="footerHome">Accueil</a>
             <a href="#programme" data-i18n="footerProgram">Programme</a>
             <a href="#rsvp" data-i18n="footerRsvp">RSVP</a>
             <a href="#contacts" data-i18n="footerContacts">Contacts</a>
           </div>
-
-          <div class="footer-meta">
-            <p data-i18n="footerThanks">
-              Nous remercions Dieu pour cette merveilleuse étape de notre vie.
-            </p>
-            <div class="social-links">
-              <a href="https://instagram.com" target="_blank" rel="noreferrer">Instagram</a>
-              <a href="https://facebook.com" target="_blank" rel="noreferrer">Facebook</a>
-              <a href="mailto:contact@example.com" data-i18n="footerLegal">Mentions légales</a>
-            </div>
-            <small>© 2026 Grégoire & Gregorine</small>
+          <div class="social-links">
+            <a href="https://instagram.com" target="_blank" rel="noreferrer">Instagram</a>
+            <a href="https://facebook.com" target="_blank" rel="noreferrer">Facebook</a>
+            <a href="mailto:contact@example.com" data-i18n="footerLegal">Mentions légales</a>
           </div>
+          <small>© 2026 Grégoire & Gregorine</small>
         </div>
       </footer>
-
-      <nav class="mobile-dock" aria-label="Navigation mobile">
-        <a href="#accueil" data-i18n="navHome">Accueil</a>
-        <a href="#programme" data-i18n="navProgram">Programme</a>
-        <a href="#rsvp" data-i18n="navRsvp">RSVP</a>
-        <a href="#contacts" data-i18n="navContacts">Contacts</a>
-      </nav>
     </div>
 
     <div class="lightbox" id="lightbox" hidden>
       <div class="lightbox-backdrop" id="lightbox-close"></div>
       <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
-        <button class="icon-button lightbox-dismiss" type="button" id="lightbox-dismiss" aria-label="Fermer">
+        <button class="header-icon lightbox-dismiss" type="button" id="lightbox-dismiss" aria-label="Fermer">
           ×
         </button>
         <div class="lightbox-media" id="lightbox-media"></div>
