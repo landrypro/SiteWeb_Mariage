@@ -33,7 +33,7 @@ function doPost(event) {
     const message = clean_(data.message, 1500);
     const language = clean_(data.language, 5);
 
-    if (!fullName || !phone || !email || !["yes", "maybe", "no"].includes(attendance)) {
+    if (!fullName || !phone || !["yes", "maybe", "no"].includes(attendance)) {
       return jsonResponse_({ ok: false, error: "Champs obligatoires manquants." });
     }
 
