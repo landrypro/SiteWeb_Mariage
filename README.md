@@ -1,6 +1,6 @@
 # SiteWeb_Mariage
 
-Site internet de mariage chrétien pour **Grégoire & Gregorine**.
+Site internet de mariage chrétien pour **Carole & Guy Landry**.
 
 ## Contenu
 
@@ -26,4 +26,4 @@ Site internet de mariage chrétien pour **Grégoire & Gregorine**.
 
 ## Mise en ligne
 
-Ce livrable peut être déployé sur GitHub Pages, Vercel, Cloudflare Pages ou intégré ensuite dans une version Next.js avec backend Supabase.
+Ce livrable peut être déployé sur GitHub Pages, Vercel ou Cloudflare Pages. Le RSVP peut être relié à Google Sheets via le script présent dans `google-apps-script/`.

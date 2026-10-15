@@ -1,3 +1,6 @@
+const RSVP_ENDPOINT =
+  "https://script.google.com/macros/s/AKfycbwa2LX1ROdrqF4tt3pnFW4kq4OLiEK30GBn5kYAtOLtRQePfmLGWkvkD42YwKONlwi3/exec";
+
 const state = {
   lang: localStorage.getItem("gg-lang") || "fr",
   theme:
@@ -6,6 +9,9 @@ const state = {
       : "light",
   galleryFilter: "all",
   testimonialIndex: 0,
+  mobileNavOpen: false,
+  lastCountdownAnnouncement: "",
+  lastFocusedElement: null,
   enabledSections: {
     gifts: true,
   },
@@ -13,12 +19,18 @@ const state = {
 
 const copy = {
   fr: {
-    brandSubtitle: "07 Novembre 2026 • Douala",
+    brandSubtitle: "21 Novembre 2026 • Douala",
     navHome: "Accueil",
     navStory: "Notre histoire",
     navProgram: "Programme",
+    navDress: "Dress code",
+    navGallery: "Galerie",
+    navInfo: "Infos",
     navRsvp: "RSVP",
     navContacts: "Contacts",
+    menuLabel: "Menu",
+    menuOpen: "Ouvrir le menu",
+    menuClose: "Fermer le menu",
     ctaRsvp: "Confirmer ma présence",
     ctaProgram: "Voir le programme",
     whatsappFloating: "Assistance WhatsApp",
@@ -26,7 +38,7 @@ const copy = {
     themeToggle: "Activer le mode sombre",
     heroKicker: "Mariage chrétien",
     heroSubtitle: "Nous célébrons notre union devant Dieu, nos familles et nos amis.",
-    heroDate: "07 Novembre 2026 — Douala, Cameroun",
+    heroDate: "21 Novembre 2026 — Douala, Cameroun",
     heroMood: "Foi • Famille • Joie",
     heroVerse: "“L’amour est patient, il est plein de bonté.”",
     heroVerseRef: "1 Corinthiens 13:4",
@@ -134,7 +146,7 @@ const copy = {
     contactsIntro:
       "Une présentation claire des responsables rassure les invités et fluidifie l’organisation le jour J.",
     emergencyTitle: "Urgence jour J",
-    emergencyText: "Téléphone : à compléter",
+    emergencyText: "WhatsApp : +237 696 475 797",
     emergencyButton: "Contacter sur WhatsApp",
     footerEyebrow: "Verset biblique",
     footerVerse: "“Ce que Dieu a uni, que l’homme ne le sépare pas.”",
@@ -150,12 +162,18 @@ const copy = {
     calendarDownloaded: "Le fichier calendrier a été généré.",
   },
   en: {
-    brandSubtitle: "November 7, 2026 • Douala",
+    brandSubtitle: "November 21, 2026 • Douala",
     navHome: "Home",
     navStory: "Our story",
     navProgram: "Schedule",
+    navDress: "Dress code",
+    navGallery: "Gallery",
+    navInfo: "Info",
     navRsvp: "RSVP",
     navContacts: "Contacts",
+    menuLabel: "Menu",
+    menuOpen: "Open menu",
+    menuClose: "Close menu",
     ctaRsvp: "Confirm attendance",
     ctaProgram: "View schedule",
     whatsappFloating: "WhatsApp help",
@@ -163,7 +181,7 @@ const copy = {
     themeToggle: "Enable dark mode",
     heroKicker: "Christian wedding",
     heroSubtitle: "We celebrate our union before God, our families, and our friends.",
-    heroDate: "November 7, 2026 — Douala, Cameroon",
+    heroDate: "November 21, 2026 — Douala, Cameroon",
     heroMood: "Faith • Family • Joy",
     heroVerse: "“Love is patient, love is kind.”",
     heroVerseRef: "1 Corinthians 13:4",
@@ -271,7 +289,7 @@ const copy = {
     contactsIntro:
       "A clear presentation of key coordinators reassures guests and keeps the day running smoothly.",
     emergencyTitle: "Wedding day emergency",
-    emergencyText: "Phone number: to be completed",
+    emergencyText: "WhatsApp: +237 696 475 797",
     emergencyButton: "Reach out on WhatsApp",
     footerEyebrow: "Bible verse",
     footerVerse: "“What God has joined together, let no one separate.”",
@@ -311,7 +329,7 @@ const events = [
   },
   {
     title: { fr: "Bénédiction religieuse", en: "Religious blessing" },
-    date: { fr: "Date : 07 Novembre 2026", en: "Date: November 7, 2026" },
+    date: { fr: "Date : 21 Novembre 2026", en: "Date: November 21, 2026" },
     time: { fr: "Heure : à compléter", en: "Time: to be completed" },
     venue: { fr: "Église : à compléter", en: "Church: to be completed" },
     address: { fr: "Adresse : à compléter", en: "Address: to be completed" },
@@ -323,7 +341,7 @@ const events = [
   },
   {
     title: { fr: "Cocktail de célébration", en: "Celebration cocktail" },
-    date: { fr: "Date : 07 Novembre 2026", en: "Date: November 7, 2026" },
+    date: { fr: "Date : 21 Novembre 2026", en: "Date: November 21, 2026" },
     time: { fr: "Heure : à compléter", en: "Time: to be completed" },
     venue: { fr: "Lieu : à compléter", en: "Venue: to be completed" },
     address: { fr: "Adresse : à compléter", en: "Address: to be completed" },
@@ -458,6 +476,7 @@ const galleryCategories = [
 const galleryItems = [
   {
     category: "meeting",
+    image: "assets/photos/gallery-meeting-01.jpg",
     title: { fr: "Premiers regards", en: "First glances" },
     description: {
       fr: "Une vignette idéale pour raconter le tout premier chapitre de votre rencontre.",
@@ -467,6 +486,7 @@ const galleryItems = [
   },
   {
     category: "meeting",
+    image: "assets/photos/gallery-meeting-02.jpg",
     title: { fr: "Souvenir fondateur", en: "Foundational memory" },
     description: {
       fr: "Utilisez cet emplacement pour une photo prise au début de l’amitié ou de la relation.",
@@ -476,6 +496,7 @@ const galleryItems = [
   },
   {
     category: "engagement",
+    image: "assets/photos/gallery-engagement-01.jpg",
     title: { fr: "La promesse", en: "The promise" },
     description: {
       fr: "Une image des fiançailles, de la bague ou d’un moment de prière en couple.",
@@ -485,6 +506,7 @@ const galleryItems = [
   },
   {
     category: "engagement",
+    image: "assets/photos/gallery-engagement-02.jpg",
     title: { fr: "Joie partagée", en: "Shared joy" },
     description: {
       fr: "Mettez ici un souvenir entouré de proches ou un cliché officiel des fiançailles.",
@@ -494,6 +516,7 @@ const galleryItems = [
   },
   {
     category: "preparation",
+    image: "assets/photos/gallery-preparation-01.jpg",
     title: { fr: "Préparatifs doux", en: "Gentle preparations" },
     description: {
       fr: "Ajoutez les coulisses : essais, décor, papeterie, répétitions ou rendez-vous clés.",
@@ -503,6 +526,7 @@ const galleryItems = [
   },
   {
     category: "preparation",
+    image: "assets/photos/gallery-preparation-02.jpg",
     title: { fr: "Détails du jour J", en: "Wedding day details" },
     description: {
       fr: "Parfait pour montrer des accessoires, bouquets, tenues ou éléments liturgiques.",
@@ -512,6 +536,7 @@ const galleryItems = [
   },
   {
     category: "couple",
+    image: "assets/photos/gallery-couple-01.jpg",
     title: { fr: "Portrait officiel", en: "Official portrait" },
     description: {
       fr: "Une grande photo du couple pour porter l’identité visuelle du site.",
@@ -521,6 +546,7 @@ const galleryItems = [
   },
   {
     category: "couple",
+    image: "assets/photos/gallery-couple-02.jpg",
     title: { fr: "Tendresse et lumière", en: "Tenderness and light" },
     description: {
       fr: "Une photo pleine de douceur pour conclure la galerie avec chaleur.",
@@ -614,24 +640,22 @@ const travelTips = {
 
 const contacts = [
   {
-    title: { fr: "Wedding Planner", en: "Wedding Planner" },
-    name: { fr: "Nom : à compléter", en: "Name: to be completed" },
-    phone: { fr: "Téléphone : à compléter", en: "Phone: to be completed" },
+    title: { fr: "Contact principal", en: "Main contact" },
+    name: { fr: "WhatsApp", en: "WhatsApp" },
+    phone: { fr: "+237 696 475 797", en: "+237 696 475 797" },
+    whatsapp: "237696475797",
   },
   {
     title: { fr: "Responsable accueil", en: "Welcome coordinator" },
-    name: { fr: "Nom : à compléter", en: "Name: to be completed" },
-    phone: { fr: "Téléphone : à compléter", en: "Phone: to be completed" },
+    name: { fr: "WhatsApp", en: "WhatsApp" },
+    phone: { fr: "+237 696 475 797", en: "+237 696 475 797" },
+    whatsapp: "237696475797",
   },
   {
     title: { fr: "Responsable transport", en: "Transport coordinator" },
-    name: { fr: "Nom : à compléter", en: "Name: to be completed" },
-    phone: { fr: "Téléphone : à compléter", en: "Phone: to be completed" },
-  },
-  {
-    title: { fr: "Urgence jour J", en: "Wedding day emergency" },
-    name: { fr: "Nom : équipe mariage", en: "Name: wedding team" },
-    phone: { fr: "Téléphone : à compléter", en: "Phone: to be completed" },
+    name: { fr: "WhatsApp", en: "WhatsApp" },
+    phone: { fr: "+237 698 495 751", en: "+237 698 495 751" },
+    whatsapp: "237698495751",
   },
 ];
 
@@ -654,6 +678,18 @@ function setTheme(theme) {
   document.getElementById("theme-toggle").setAttribute("aria-label", nextActionLabel);
 }
 
+function setMobileMenu(open) {
+  state.mobileNavOpen = open;
+  const menu = document.getElementById("mobile-nav");
+  const toggle = document.getElementById("mobile-menu-toggle");
+  if (!menu || !toggle) return;
+
+  menu.hidden = !open;
+  menu.classList.toggle("is-open", open);
+  toggle.setAttribute("aria-expanded", String(open));
+  toggle.setAttribute("aria-label", t(open ? "menuClose" : "menuOpen"));
+}
+
 function applyTranslations() {
   document.documentElement.lang = state.lang;
   document.querySelectorAll("[data-i18n]").forEach((element) => {
@@ -667,6 +703,10 @@ function applyTranslations() {
   document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => {
     element.setAttribute("aria-label", t(element.dataset.i18nAriaLabel));
   });
+
+  if (state.mobileNavOpen) {
+    setMobileMenu(true);
+  }
 
   renderStory();
   renderProgram();
@@ -872,7 +912,7 @@ function renderContacts() {
             <span>${localized(contact.name)}</span>
             <span>${localized(contact.phone)}</span>
           </div>
-          <a href="https://wa.me/237600000000" target="_blank" rel="noreferrer">WhatsApp</a>
+          <a href="https://wa.me/${contact.whatsapp}" target="_blank" rel="noreferrer">WhatsApp</a>
         </article>
       `,
     )
@@ -880,7 +920,7 @@ function renderContacts() {
 }
 
 function updateCountdown() {
-  const weddingDate = new Date("2026-11-07T10:00:00+01:00").getTime();
+  const weddingDate = new Date("2026-11-21T10:00:00+01:00").getTime();
   const now = Date.now();
   const diff = Math.max(weddingDate - now, 0);
 
@@ -897,21 +937,35 @@ function updateCountdown() {
   document.getElementById("hours").textContent = String(hours).padStart(2, "0");
   document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
   document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+
+  const liveStatus = document.getElementById("countdown-live-status");
+  const announcement =
+    state.lang === "fr"
+      ? `${days} jours, ${hours} heures et ${minutes} minutes avant le mariage.`
+      : `${days} days, ${hours} hours, and ${minutes} minutes until the wedding.`;
+  if (liveStatus && announcement !== state.lastCountdownAnnouncement) {
+    liveStatus.textContent = announcement;
+    state.lastCountdownAnnouncement = announcement;
+  }
+}
+
+function formatIcsTimestamp(date) {
+  return date.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z");
 }
 
 function createCalendarFile() {
   const lines = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//Gregoire Gregorine//Mariage//FR",
+    "PRODID:-//Carole Guy Landry//Mariage//FR",
     "BEGIN:VEVENT",
-    "UID:gregoire-gregorine-20261107@example.com",
-    "DTSTAMP:20260620T000000Z",
-    "DTSTART:20261107T090000",
-    "DTEND:20261107T180000",
-    "SUMMARY:Mariage de Grégoire & Gregorine",
+    "UID:carole-guy-landry-20261121@example.com",
+    `DTSTAMP:${formatIcsTimestamp(new Date())}`,
+    "DTSTART;TZID=Africa/Douala:20261121T100000",
+    "DTEND;TZID=Africa/Douala:20261121T235900",
+    "SUMMARY:Mariage de Carole & Guy Landry",
     "LOCATION:Douala, Cameroun",
-    "DESCRIPTION:Programme à préciser : mariage civil, bénédiction religieuse et cocktail de célébration.",
+    "DESCRIPTION:Journee complete de mariage a Douala. Le programme detaille sera precise prochainement.",
     "END:VEVENT",
     "END:VCALENDAR",
   ];
@@ -920,7 +974,7 @@ function createCalendarFile() {
   const url = URL.createObjectURL(blob);
   const anchor = document.createElement("a");
   anchor.href = url;
-  anchor.download = "gregoire-gregorine-mariage.ics";
+  anchor.download = "carole-guy-landry-mariage.ics";
   document.body.append(anchor);
   anchor.click();
   anchor.remove();
@@ -929,6 +983,7 @@ function createCalendarFile() {
 
 function openLightbox(item) {
   const lightbox = document.getElementById("lightbox");
+  state.lastFocusedElement = document.activeElement;
   document.getElementById("lightbox-media").style.background = gradientFrom(item.colors);
   document.getElementById("lightbox-category").textContent = localized(
     galleryCategories.find((category) => category.key === item.category)?.label,
@@ -936,10 +991,19 @@ function openLightbox(item) {
   document.getElementById("lightbox-title").textContent = localized(item.title);
   document.getElementById("lightbox-description").textContent = localized(item.description);
   lightbox.hidden = false;
+  document.body.classList.add("modal-open");
+  document.getElementById("lightbox-dismiss").focus();
 }
 
 function closeLightbox() {
-  document.getElementById("lightbox").hidden = true;
+  const lightbox = document.getElementById("lightbox");
+  if (lightbox.hidden) return;
+  lightbox.hidden = true;
+  document.body.classList.remove("modal-open");
+  if (state.lastFocusedElement && typeof state.lastFocusedElement.focus === "function") {
+    state.lastFocusedElement.focus({ preventScroll: true });
+  }
+  state.lastFocusedElement = null;
 }
 
 function applyFeatureFlags() {
@@ -958,6 +1022,14 @@ function bindEvents() {
 
   document.getElementById("theme-toggle").addEventListener("click", () => {
     setTheme(state.theme === "dark" ? "light" : "dark");
+  });
+
+  document.getElementById("mobile-menu-toggle").addEventListener("click", () => {
+    setMobileMenu(!state.mobileNavOpen);
+  });
+
+  document.querySelectorAll("#mobile-nav a").forEach((link) => {
+    link.addEventListener("click", () => setMobileMenu(false));
   });
 
   document.getElementById("calendar-download").addEventListener("click", () => {
@@ -985,18 +1057,67 @@ function bindEvents() {
       submittedAt: new Date().toISOString(),
       language: state.lang,
     };
-    const existing = JSON.parse(localStorage.getItem("gg-rsvp-demo") || "[]");
-    existing.push(payload);
-    localStorage.setItem("gg-rsvp-demo", JSON.stringify(existing));
-    form.reset();
-    form.querySelector('input[name="guests"]').value = "0";
-    document.getElementById("form-status").textContent = t("formSuccess");
+
+    if (!RSVP_ENDPOINT) {
+      const existing = JSON.parse(localStorage.getItem("gg-rsvp-demo") || "[]");
+      existing.push(payload);
+      localStorage.setItem("gg-rsvp-demo", JSON.stringify(existing));
+      form.reset();
+      form.querySelector('input[name="guests"]').value = "0";
+      document.getElementById("form-status").textContent = t("formSuccess");
+      return;
+    }
+
+    fetch(RSVP_ENDPOINT, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+      body: new URLSearchParams(payload),
+    })
+      .then(() => {
+        form.reset();
+        form.querySelector('input[name="guests"]').value = "0";
+        document.getElementById("form-status").textContent = t("formSuccess");
+      })
+      .catch(() => {
+        document.getElementById("form-status").textContent =
+          state.lang === "fr"
+            ? "La confirmation n a pas pu être envoyée. Réessayez dans un instant."
+            : "Your RSVP could not be sent. Please try again in a moment.";
+      });
   });
 
   document.getElementById("lightbox-dismiss").addEventListener("click", closeLightbox);
   document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeLightbox();
+    const lightbox = document.getElementById("lightbox");
+
+    if (event.key === "Escape") {
+      if (!lightbox.hidden) {
+        closeLightbox();
+      } else if (state.mobileNavOpen) {
+        setMobileMenu(false);
+        document.getElementById("mobile-menu-toggle").focus();
+      }
+      return;
+    }
+
+    if (!lightbox.hidden && event.key === "Tab") {
+      const focusable = lightbox.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      );
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (!first || !last) return;
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
   });
 }
 
