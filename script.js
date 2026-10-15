@@ -17,6 +17,20 @@ const state = {
   },
 };
 
+// Add real photo paths here when supplied. Reference images are illustrative.
+const PHOTO_OVERRIDES = {
+  hero: "",
+  gallery: {},
+};
+const referencePhotos = [
+  "assets/reference/0116397ed30dfe68.jpg",
+  "assets/reference/d159134086cc67ec.jpg",
+  "assets/reference/80d7b6c5117a1ecd.jpg",
+  "assets/reference/81ec39975d01e6a7.jpg",
+  "assets/reference/47f3c0a4f470dd49.jpg",
+  "assets/reference/97a1ec4fa699bbb4.jpg",
+];
+
 const copy = {
   fr: {
     brandSubtitle: "21 Novembre 2026 • Douala",
@@ -57,24 +71,24 @@ const copy = {
     heroNoteTwoLabel: "Réception",
     heroNoteTwoValue: "Cocktail de célébration",
     storyEyebrow: "Notre histoire",
-    storyTitle: "Un chemin de foi, d’amitié et d’amour",
+    storyTitle: "Notre histoire",
     storyIntro:
-      "Cette frise a été pensée pour accueillir vos souvenirs clés. Chaque bloc est facilement modifiable pour intégrer les vrais textes du couple.",
+      "C’est avec joie et reconnaissance envers Dieu que nous partageons notre chemin.",
     storyPlaceholder: "Texte modifiable : ajoutez ici votre récit, les détails marquants ou une anecdote mémorable.",
     storyEditable: "Zone éditable",
     programEyebrow: "Programme officiel",
-    programTitle: "Les temps forts de notre célébration",
+    programTitle: "Programme officiel",
     programIntro:
-      "Les horaires et adresses peuvent être affinés au fur et à mesure. Les cartes ci-dessous sont prêtes pour les mises à jour finales.",
+      "Trois moments pour célébrer ensemble.",
     calendarButton: "Ajouter au calendrier",
     programMap: "Voir sur Google Maps",
     programStatus: "À compléter",
     faqEyebrow: "Informations importantes",
-    faqTitle: "Questions fréquentes",
+    faqTitle: "Informations importantes",
     faqIntro:
-      "Une FAQ claire aide les invités à trouver rapidement les réponses essentielles avant le jour J.",
+      "Tout ce qu’il faut savoir.",
     dressEyebrow: "Dress code",
-    dressTitle: "Une élégance douce, lumineuse et harmonieuse",
+    dressTitle: "Dress code",
     dressIntro:
       "Nous vous invitons à vous habiller avec élégance dans des tons doux et chaleureux, en harmonie avec notre thème.",
     dressSky: "Bleu ciel",
@@ -82,9 +96,9 @@ const copy = {
     dressIvory: "Blanc cassé",
     dressNeutral: "Beige et tons neutres",
     rsvpEyebrow: "RSVP",
-    rsvpTitle: "Confirmez votre présence avec simplicité",
+    rsvpTitle: "Confirmer ma présence",
     rsvpIntro:
-      "Les confirmations sont transmises de façon centralisée aux organisateurs via Google Sheets.",
+      "Nous avons hâte de partager cette journée avec vous.",
     rsvpFeatureOneTitle: "Pensé pour l’administration",
     rsvpFeatureOneText: "Stockage en base, export CSV/Excel et suivi des invités par foyer.",
     rsvpFeatureTwoTitle: "Parcours mobile fluide",
@@ -94,46 +108,49 @@ const copy = {
     formPhone: "Téléphone",
     formEmail: "Email",
     formGuests: "Nombre d’accompagnants",
-    formAttendance: "Confirmation de présence",
+    formAttendance: "Serez-vous présent(e) ?",
     formDiet: "Restrictions alimentaires",
     formMessage: "Message aux mariés",
-    formNamePlaceholder: "Ex. Marie Ntone",
-    formPhonePlaceholder: "Ex. +237 6 00 00 00 00",
-    formEmailPlaceholder: "Ex. marie@example.com",
-    formDietPlaceholder: "Allergies, régime particulier, préférences...",
-    formMessagePlaceholder: "Laissez un mot d’encouragement ou de bénédiction...",
+    formNamePlaceholder: "Nom complet *",
+    formPhonePlaceholder: "Téléphone *",
+    formEmailPlaceholder: "Email *",
+    formDietPlaceholder: "Restrictions alimentaires",
+    formMessagePlaceholder: "Message aux mariés",
     attendanceYes: "Oui, avec joie",
     attendanceMaybe: "Je confirme bientôt",
-    attendanceNo: "Je ne pourrai pas être présent",
+    attendanceNo: "Malheureusement non",
     formSubmit: "Envoyer ma confirmation",
     formSuccess: "Merci pour votre confirmation. Nous avons hâte de célébrer ce moment avec vous.",
     galleryEyebrow: "Galerie photos",
-    galleryTitle: "Souvenirs, préparatifs et moments précieux",
+    galleryTitle: "Galerie photos",
     galleryIntro:
-      "La structure ci-dessous supporte des catégories, une grille responsive et une lightbox élégante pour la consultation des images.",
+      "Quelques instants de notre histoire.",
     filterAll: "Tout voir",
     testimonialsEyebrow: "Témoignages",
-    testimonialsTitle: "Des paroles de bénédiction autour de nous",
+    testimonialsTitle: "Témoignages",
     testimonialsIntro:
-      "Parents, témoins, amis proches et pasteur peuvent partager ici leurs mots d’amour et de foi.",
+      "Les mots de ceux qui nous sont chers.",
     testimonialPrev: "Témoignage précédent",
     testimonialNext: "Témoignage suivant",
     giftEyebrow: "Cadeaux et soutien",
-    giftTitle: "Votre présence est le plus beau des cadeaux",
+    giftTitle: "Cadeaux & soutien",
     giftIntro:
-      "Cette section peut être activée ou désactivée depuis l’administration selon les souhaits du couple.",
+      "Votre présence est le plus beau des cadeaux.",
     giftOptionOneTag: "Option 1",
     giftOptionOneTitle: "Liste de mariage",
     giftOptionOneText:
-      "Intégration d’une liste de cadeaux avec lien vers une plateforme dédiée ou une liste interne.",
+      "Détails à venir.",
     giftOptionTwoTag: "Option 2",
-    giftOptionTwoTitle: "Soutien libre",
+    giftOptionTwoTitle: "Voyage de noces",
+    giftMobileTitle: "Mobile Money",
+    giftBankTitle: "Coordonnées bancaires",
+    giftPending: "Modalités à confirmer.",
     giftOptionTwoText:
-      "Possibilité d’ajouter un texte d’accompagnement, des coordonnées bancaires ou un QR code sécurisé.",
+      "Les modalités seront communiquées prochainement.",
     travelEyebrow: "Hébergement & voyage",
-    travelTitle: "Accueillir au mieux les invités venant de l’extérieur",
+    travelTitle: "Hébergement & voyage",
     travelIntro:
-      "Hôtels, transports, carte et assistance WhatsApp peuvent être regroupés dans cette section pratique.",
+      "Pour nos invités venant de l’extérieur.",
     travelMapTag: "Carte interactive",
     travelMapTitle: "Repérer rapidement les lieux clés",
     travelMapText:
@@ -142,9 +159,9 @@ const copy = {
     travelTipsTitle: "Conseils transport",
     travelWhatsappButton: "Demander de l’aide sur WhatsApp",
     contactsEyebrow: "Contacts utiles",
-    contactsTitle: "Le bon contact au bon moment",
+    contactsTitle: "Contacts utiles",
     contactsIntro:
-      "Une présentation claire des responsables rassure les invités et fluidifie l’organisation le jour J.",
+      "Une question le jour J ? Contactez-nous.",
     emergencyTitle: "Urgence jour J",
     emergencyText: "WhatsApp : +237 696 475 797",
     emergencyButton: "Contacter sur WhatsApp",
@@ -159,7 +176,14 @@ const copy = {
     footerLegal: "Mentions légales",
     modeDarkLabel: "Mode sombre",
     modeLightLabel: "Mode clair",
-    calendarDownloaded: "Le fichier calendrier a été généré.",
+    calendarDownloaded: "Le fichier calendrier de la journée complète a été généré.",
+    headerConfirm: "Confirmer",
+    paletteTitle: "Couleurs recommandées",
+    photoPreview: "Photo d’illustration — vos photos bientôt",
+    galleryPreview: "Visuels d’illustration du modèle, en attendant nos photos.",
+    testimonialPending: "Message à venir — les mots de nos proches seront partagés ici.",
+    pendingName: "À compléter",
+    dayCalendar: "Calendrier de la journée",
   },
   en: {
     brandSubtitle: "November 21, 2026 • Douala",
@@ -200,24 +224,24 @@ const copy = {
     heroNoteTwoLabel: "Reception",
     heroNoteTwoValue: "Celebration cocktail",
     storyEyebrow: "Our story",
-    storyTitle: "A journey of faith, friendship, and love",
+    storyTitle: "Our story",
     storyIntro:
-      "This timeline is designed to host your key memories. Every block is easy to edit with the couple's real story.",
+      "With joy and gratitude to God, we share our journey.",
     storyPlaceholder: "Editable text: add your story, meaningful details, or a memorable anecdote here.",
     storyEditable: "Editable copy",
     programEyebrow: "Official schedule",
-    programTitle: "Highlights of our celebration",
+    programTitle: "Official schedule",
     programIntro:
-      "Times and addresses can be refined over time. The cards below are ready for final updates.",
+      "Three moments to celebrate together.",
     calendarButton: "Add to calendar",
     programMap: "Open in Google Maps",
     programStatus: "To be confirmed",
     faqEyebrow: "Important information",
-    faqTitle: "Frequently asked questions",
+    faqTitle: "Important information",
     faqIntro:
-      "A clear FAQ helps guests find essential answers quickly before the wedding day.",
+      "Everything you need to know.",
     dressEyebrow: "Dress code",
-    dressTitle: "Soft, luminous, and harmonious elegance",
+    dressTitle: "Dress code",
     dressIntro:
       "We invite you to dress elegantly in soft, warm tones that match our wedding theme.",
     dressSky: "Sky blue",
@@ -225,9 +249,9 @@ const copy = {
     dressIvory: "Off-white",
     dressNeutral: "Beige and neutral tones",
     rsvpEyebrow: "RSVP",
-    rsvpTitle: "Confirm your attendance with ease",
+    rsvpTitle: "Confirm attendance",
     rsvpIntro:
-      "Confirmations are sent centrally to the organizers through Google Sheets.",
+      "We look forward to sharing this day with you.",
     rsvpFeatureOneTitle: "Built for administration",
     rsvpFeatureOneText: "Database storage, CSV/Excel export, and guest management by household.",
     rsvpFeatureTwoTitle: "Smooth mobile flow",
@@ -237,46 +261,49 @@ const copy = {
     formPhone: "Phone number",
     formEmail: "Email",
     formGuests: "Number of guests",
-    formAttendance: "Attendance confirmation",
+    formAttendance: "Will you be attending?",
     formDiet: "Dietary restrictions",
     formMessage: "Message to the couple",
-    formNamePlaceholder: "Example: Marie Ntone",
-    formPhonePlaceholder: "Example: +237 6 00 00 00 00",
-    formEmailPlaceholder: "Example: marie@example.com",
-    formDietPlaceholder: "Allergies, special diet, preferences...",
-    formMessagePlaceholder: "Leave a blessing or a heartfelt note...",
+    formNamePlaceholder: "Full name *",
+    formPhonePlaceholder: "Phone *",
+    formEmailPlaceholder: "Email *",
+    formDietPlaceholder: "Dietary restrictions",
+    formMessagePlaceholder: "Message to the couple",
     attendanceYes: "Yes, joyfully",
     attendanceMaybe: "I will confirm soon",
-    attendanceNo: "I will not be able to attend",
+    attendanceNo: "Unfortunately not",
     formSubmit: "Send my RSVP",
     formSuccess: "Thank you for your confirmation. We look forward to celebrating with you.",
     galleryEyebrow: "Photo gallery",
-    galleryTitle: "Memories, preparations, and cherished moments",
+    galleryTitle: "Photo gallery",
     galleryIntro:
-      "The layout below supports categories, a responsive grid, and an elegant lightbox for browsing photos.",
+      "A few moments from our story.",
     filterAll: "View all",
     testimonialsEyebrow: "Testimonials",
-    testimonialsTitle: "Words of blessing around us",
+    testimonialsTitle: "Testimonials",
     testimonialsIntro:
-      "Parents, witnesses, close friends, and the pastor can share their words of love and faith here.",
+      "Words from those dear to us.",
     testimonialPrev: "Previous testimonial",
     testimonialNext: "Next testimonial",
     giftEyebrow: "Gifts and support",
-    giftTitle: "Your presence is the greatest gift",
+    giftTitle: "Gifts & support",
     giftIntro:
-      "This section can be enabled or disabled from the admin area depending on the couple's wishes.",
+      "Your presence is the greatest gift.",
     giftOptionOneTag: "Option 1",
     giftOptionOneTitle: "Wedding registry",
     giftOptionOneText:
-      "Integrate a gift list linked to a dedicated platform or an internal registry page.",
+      "Details coming soon.",
     giftOptionTwoTag: "Option 2",
-    giftOptionTwoTitle: "Free support",
+    giftOptionTwoTitle: "Honeymoon",
+    giftMobileTitle: "Mobile Money",
+    giftBankTitle: "Bank details",
+    giftPending: "Details to be confirmed.",
     giftOptionTwoText:
-      "You can add a support note, bank details, or a secure QR code if desired.",
+      "Details will be shared soon.",
     travelEyebrow: "Travel & stay",
-    travelTitle: "Welcoming out-of-town guests with care",
+    travelTitle: "Travel & stay",
     travelIntro:
-      "Hotels, transport guidance, a map, and WhatsApp assistance can all live in this practical section.",
+      "For our guests travelling from afar.",
     travelMapTag: "Interactive map",
     travelMapTitle: "Quickly locate key places",
     travelMapText:
@@ -285,9 +312,9 @@ const copy = {
     travelTipsTitle: "Transport tips",
     travelWhatsappButton: "Ask for help on WhatsApp",
     contactsEyebrow: "Helpful contacts",
-    contactsTitle: "The right contact at the right time",
+    contactsTitle: "Helpful contacts",
     contactsIntro:
-      "A clear presentation of key coordinators reassures guests and keeps the day running smoothly.",
+      "A question on the day? Get in touch.",
     emergencyTitle: "Wedding day emergency",
     emergencyText: "WhatsApp: +237 696 475 797",
     emergencyButton: "Reach out on WhatsApp",
@@ -302,7 +329,14 @@ const copy = {
     footerLegal: "Legal notice",
     modeDarkLabel: "Dark mode",
     modeLightLabel: "Light mode",
-    calendarDownloaded: "The calendar file has been generated.",
+    calendarDownloaded: "The calendar file for the full wedding day has been generated.",
+    headerConfirm: "Confirm",
+    paletteTitle: "Recommended colours",
+    photoPreview: "Illustrative photo — our photos coming soon",
+    galleryPreview: "Illustrative reference images, until our photos are available.",
+    testimonialPending: "Message coming soon — words from our loved ones will appear here.",
+    pendingName: "To be confirmed",
+    dayCalendar: "Full-day calendar",
   },
 };
 
@@ -317,7 +351,7 @@ const storyItems = [
 const events = [
   {
     title: { fr: "Mariage civil", en: "Civil wedding" },
-    date: { fr: "Date : à compléter", en: "Date: to be completed" },
+    date: { fr: "Date : 21 Novembre 2026", en: "Date: November 21, 2026" },
     time: { fr: "Heure : à compléter", en: "Time: to be completed" },
     venue: { fr: "Lieu : Mairie de Douala / à confirmer", en: "Venue: Douala City Hall / to be confirmed" },
     address: { fr: "Adresse : à compléter", en: "Address: to be completed" },
@@ -657,6 +691,12 @@ const contacts = [
     phone: { fr: "+237 698 495 751", en: "+237 698 495 751" },
     whatsapp: "237698495751",
   },
+  {
+    title: { fr: "Urgence jour J", en: "Wedding day emergency" },
+    name: { fr: "WhatsApp", en: "WhatsApp" },
+    phone: { fr: "+237 696 475 797", en: "+237 696 475 797" },
+    whatsapp: "237696475797",
+  },
 ];
 
 function t(key) {
@@ -692,6 +732,7 @@ function setMobileMenu(open) {
 
 function applyTranslations() {
   document.documentElement.lang = state.lang;
+  document.getElementById("language-toggle").textContent = state.lang === "fr" ? "EN" : "FR";
   document.querySelectorAll("[data-i18n]").forEach((element) => {
     element.textContent = t(element.dataset.i18n);
   });
@@ -731,7 +772,7 @@ function renderStory() {
             <small>${t("storyEditable")}</small>
           </div>
           <h3>${localized(item.title)}</h3>
-          <p>${t("storyPlaceholder")}</p>
+          <p>${state.lang === "fr" ? "Notre récit sera partagé prochainement." : "Our story will be shared soon."}</p>
         </article>
       `,
     )
@@ -742,24 +783,30 @@ function renderProgram() {
   const root = document.getElementById("program-grid");
   root.innerHTML = events
     .map(
-      (event) => `
+      (event, index) => `
         <article class="program-card">
-          <span class="card-tag">${t("programStatus")}</span>
+          <span class="program-number" aria-hidden="true">${String(index + 1).padStart(2, "0")}</span>
           <h3>${localized(event.title)}</h3>
-          <p>${localized(event.notes)}</p>
-          <div class="program-meta">
-            <span>${localized(event.date)}</span>
-            <span>${localized(event.time)}</span>
-            <span>${localized(event.venue)}</span>
-            <span>${localized(event.address)}</span>
-          </div>
+          <dl class="program-meta">
+            ${[event.date, event.time, event.venue].map(value => {
+              const [label, ...parts] = localized(value).split(":");
+              return `<div><dt>${label.trim()}</dt><dd>${parts.join(":").trim()}</dd></div>`;
+            }).join("")}
+          </dl>
           <div class="program-actions">
             <a class="button button-secondary" href="${event.maps}" target="_blank" rel="noreferrer">${t("programMap")}</a>
+            <button class="button calendar-card-button" type="button" data-calendar-day>${t("dayCalendar")}</button>
           </div>
         </article>
       `,
     )
     .join("");
+  root.querySelectorAll("[data-calendar-day]").forEach(button => {
+    button.addEventListener("click", () => {
+      createCalendarFile();
+      document.getElementById("calendar-status").textContent = t("calendarDownloaded");
+    });
+  });
 }
 
 function renderFaq() {
@@ -767,7 +814,7 @@ function renderFaq() {
   root.innerHTML = faqs
     .map(
       (item, index) => `
-        <details class="faq-item" ${index === 0 ? "open" : ""}>
+        <details class="faq-item">
           <summary>${localized(item.q)}</summary>
           <p>${localized(item.a)}</p>
         </details>
@@ -801,7 +848,7 @@ function renderGalleryFilters() {
   root.innerHTML = galleryCategories
     .map(
       (category) => `
-        <button class="filter-chip ${category.key === state.galleryFilter ? "active" : ""}" type="button" data-filter="${category.key}">
+        <button class="filter-chip ${category.key === state.galleryFilter ? "active" : ""}" aria-pressed="${category.key === state.galleryFilter}" type="button" data-filter="${category.key}">
           ${localized(category.label)}
         </button>
       `,
@@ -823,10 +870,11 @@ function gradientFrom(colors) {
 
 function renderGallery() {
   const root = document.getElementById("gallery-grid");
+  const visibleItems = galleryItems.filter((_, index) => index !== 1 && index !== 3);
   const items =
     state.galleryFilter === "all"
-      ? galleryItems
-      : galleryItems.filter((item) => item.category === state.galleryFilter);
+      ? visibleItems
+      : visibleItems.filter((item) => item.category === state.galleryFilter);
 
   root.innerHTML = items
     .map((item, index) => {
@@ -840,18 +888,22 @@ function renderGallery() {
           type="button"
           data-gallery-index="${index}"
           data-category="${categoryLabel}"
+          aria-label="${localized(item.title)}"
         >
-          <div
-            class="gallery-preview"
-            style="background-image:${gradientFrom(item.colors)},url('${item.image}');background-size:cover;background-position:center"
-          ></div>
-          <span class="card-tag">${categoryLabel}</span>
-          <h3>${localized(item.title)}</h3>
-          <p>${localized(item.description)}</p>
+          <img class="gallery-preview" src="${galleryPhoto(item)}" alt="${PHOTO_OVERRIDES.gallery[item.image] ? localized(item.title) : t("photoPreview")}" loading="lazy" width="600" height="600" />
         </button>
       `;
     })
     .join("");
+  let note = document.getElementById("gallery-preview-note");
+  if (!note) {
+    note = document.createElement("small");
+    note.id = "gallery-preview-note";
+    note.className = "gallery-note";
+    root.after(note);
+  }
+  note.textContent = t("galleryPreview");
+  note.hidden = visibleItems.every(item => PHOTO_OVERRIDES.gallery[item.image]);
 
   root.querySelectorAll("[data-gallery-index]").forEach((button) => {
     button.addEventListener("click", () => {
@@ -860,34 +912,32 @@ function renderGallery() {
   });
 }
 
-function renderTestimonial() {
-  const testimonial = testimonials[state.testimonialIndex];
-  const root = document.getElementById("testimonial-card");
+function galleryPhoto(item) {
+  const visibleItems = galleryItems.filter((_, index) => index !== 1 && index !== 3);
+  return PHOTO_OVERRIDES.gallery[item.image] || referencePhotos[visibleItems.indexOf(item)];
+}
 
-  root.innerHTML = `
-    <div class="testimonial-header">
-      <div class="avatar" aria-hidden="true">${testimonial.initials}</div>
-      <div class="testimonial-copy">
-        <h3>${localized(testimonial.name)}</h3>
-        <span class="testimonial-role">${localized(testimonial.role)}</span>
-      </div>
-    </div>
-    <div class="testimonial-copy">
-      <p>${localized(testimonial.message)}</p>
-    </div>
-  `;
+function renderTestimonial() {
+  const root = document.getElementById("testimonial-card");
+  root.innerHTML = testimonials.map(testimonial => `
+    <article class="quote-card">
+      <span class="quote-mark" aria-hidden="true">“</span>
+      <p>${t("testimonialPending")}</p>
+      <div class="quote-person"><img src="assets/reference/81ec39975d01e6a7.jpg" alt="" loading="lazy" width="44" height="44" /><div><strong>${t("pendingName")}</strong><small>${localized(testimonial.name)}</small></div></div>
+    </article>
+  `).join("");
 }
 
 function renderHotels() {
   const root = document.getElementById("hotel-grid");
-  root.innerHTML = hotels
+  root.innerHTML = hotels.slice(0, 2)
     .map(
       (hotel) => `
         <article class="hotel-card">
           <span class="card-tag">Stay</span>
           <h3>${localized(hotel.title)}</h3>
           <div class="hotel-meta">
-            <span>${localized(hotel.distance)}</span>
+            <span>${state.lang === "fr" ? "Distance : à confirmer" : "Distance: to be confirmed"}</span>
             <span>${localized(hotel.contact)}</span>
           </div>
           <p>${localized(hotel.note)}</p>
@@ -910,12 +960,14 @@ function renderContacts() {
     .map(
       (contact) => `
         <article class="contact-card">
-          <h3>${localized(contact.title)}</h3>
+          <svg class="contact-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 3.1 5.2 2 2 0 0 1 5.1 3h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L9 11a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/></svg>
+          <div class="contact-copy"><h3>${localized(contact.title)}</h3>
           <div class="contact-meta">
             <span>${localized(contact.name)}</span>
             <span>${localized(contact.phone)}</span>
           </div>
           <a href="https://wa.me/${contact.whatsapp}" target="_blank" rel="noreferrer">WhatsApp</a>
+          </div>
         </article>
       `,
     )
@@ -936,7 +988,7 @@ function updateCountdown() {
   const minutes = Math.floor((diff % hour) / minute);
   const seconds = Math.floor((diff % minute) / 1000);
 
-  document.getElementById("days").textContent = String(days).padStart(3, "0");
+  document.getElementById("days").textContent = String(days).padStart(2, "0");
   document.getElementById("hours").textContent = String(hours).padStart(2, "0");
   document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
   document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
@@ -988,14 +1040,14 @@ function openLightbox(item) {
   const lightbox = document.getElementById("lightbox");
   state.lastFocusedElement = document.activeElement;
   const media = document.getElementById("lightbox-media");
-  media.style.backgroundImage = `${gradientFrom(item.colors)},url('${item.image}')`;
+  media.style.backgroundImage = `url('${galleryPhoto(item)}')`;
   media.style.backgroundSize = "cover";
   media.style.backgroundPosition = "center";
   document.getElementById("lightbox-category").textContent = localized(
     galleryCategories.find((category) => category.key === item.category)?.label,
   );
   document.getElementById("lightbox-title").textContent = localized(item.title);
-  document.getElementById("lightbox-description").textContent = localized(item.description);
+  document.getElementById("lightbox-description").textContent = PHOTO_OVERRIDES.gallery[item.image] ? localized(item.description) : t("galleryPreview");
   lightbox.hidden = false;
   document.body.classList.add("modal-open");
   document.getElementById("lightbox-dismiss").focus();
@@ -1128,16 +1180,16 @@ function bindEvents() {
 }
 
 function init() {
+  if (PHOTO_OVERRIDES.hero) {
+    document.getElementById("hero-photo").src = PHOTO_OVERRIDES.hero;
+    document.querySelector(".hero-photo-note").hidden = true;
+  }
   setTheme(state.theme);
   applyFeatureFlags();
   applyTranslations();
   bindEvents();
   updateCountdown();
   setInterval(updateCountdown, 1000);
-  setInterval(() => {
-    state.testimonialIndex = (state.testimonialIndex + 1) % testimonials.length;
-    renderTestimonial();
-  }, 6000);
 }
 
 init();

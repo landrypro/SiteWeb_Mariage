@@ -19,10 +19,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=Nunito+Sans:wght@300;400;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Nunito+Sans:wght@300;400;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="reference-design.css" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -108,7 +109,7 @@
             >
               <span id="theme-toggle-label">Mode sombre</span>
             </button>
-            <a class="button button-primary header-rsvp" href="#rsvp" data-i18n="ctaRsvp">
+            <a class="button button-primary header-rsvp" href="#rsvp" data-i18n="headerConfirm">
               Confirmer
             </a>
           </div>
@@ -122,12 +123,12 @@
         rel="noreferrer"
         aria-label="WhatsApp"
       >
-        WhatsApp
+        <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.7 14.9L2 22l5.2-1.3A10 10 0 1 0 12 2Z"/></svg>
       </a>
 
       <main>
         <section class="hero" id="accueil">
-          <div class="hero-media" aria-hidden="true"></div>
+          <div class="hero-media" aria-hidden="true"><img id="hero-photo" src="assets/reference/hero.jpg" alt="" width="1600" height="1200" fetchpriority="high" /></div>
           <div class="hero-overlay" aria-hidden="true"></div>
 
           <div class="container hero-inner">
@@ -184,6 +185,7 @@
               </a>
             </div>
           </div>
+          <small class="hero-photo-note" data-i18n="photoPreview">Photo d’illustration — vos photos bientôt</small>
         </section>
 
         <section class="section section-soft" id="histoire">
@@ -211,7 +213,7 @@
               </p>
             </div>
 
-            <div class="program-toolbar">
+            <div class="program-toolbar" hidden>
               <button
                 class="button button-secondary"
                 id="calendar-download"
@@ -237,6 +239,7 @@
               </p>
             </div>
 
+            <p class="palette-title" data-i18n="paletteTitle">Couleurs recommandées</p>
             <div class="palette-grid">
               <article class="swatch-card sky">
                 <span class="swatch"></span>
@@ -251,6 +254,39 @@
             </div>
 
             <div class="inspiration-grid" id="dress-inspiration"></div>
+          </div>
+        </section>
+
+        <section class="section section-soft" id="rsvp">
+          <div class="container rsvp-layout">
+            <div class="section-heading centered">
+              <span class="section-line"></span>
+              <h2 data-i18n="rsvpTitle">Confirmer ma présence</h2>
+              <p class="section-intro font-display" data-i18n="rsvpIntro">Nous avons hâte de partager cette journée avec vous.</p>
+            </div>
+            <form class="rsvp-form" id="rsvp-form">
+              <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" hidden />
+              <label class="field-name">
+                <span class="sr-only" data-i18n="formName">Nom complet</span>
+                <input type="text" name="fullName" required maxlength="120" autocomplete="name" data-i18n-placeholder="formNamePlaceholder" />
+              </label>
+              <div class="form-row">
+                <label><span class="sr-only" data-i18n="formPhone">Téléphone</span><input type="tel" name="phone" required maxlength="40" autocomplete="tel" data-i18n-placeholder="formPhonePlaceholder" /></label>
+                <label><span class="sr-only" data-i18n="formEmail">Email</span><input type="email" name="email" required maxlength="200" autocomplete="email" data-i18n-placeholder="formEmailPlaceholder" /></label>
+              </div>
+              <fieldset class="attendance-field">
+                <legend data-i18n="formAttendance">Serez-vous présent(e) ?</legend>
+                <div class="attendance-options">
+                  <label><input type="radio" name="attendance" value="yes" checked required /><span data-i18n="attendanceYes">Oui, avec joie</span></label>
+                  <label><input type="radio" name="attendance" value="no" /><span data-i18n="attendanceNo">Malheureusement non</span></label>
+                </div>
+              </fieldset>
+              <label><span class="sr-only" data-i18n="formGuests">Nombre d’accompagnants</span><input type="number" name="guests" min="0" max="10" value="0" data-i18n-placeholder="formGuests" /></label>
+              <label><span class="sr-only" data-i18n="formDiet">Restrictions alimentaires</span><input type="text" name="diet" maxlength="500" data-i18n-placeholder="formDietPlaceholder" /></label>
+              <label><span class="sr-only" data-i18n="formMessage">Message aux mariés</span><textarea name="message" rows="3" maxlength="2000" data-i18n-placeholder="formMessagePlaceholder"></textarea></label>
+              <button class="button button-primary form-submit" type="submit"><span aria-hidden="true">♥</span><span data-i18n="formSubmit">Envoyer ma confirmation</span></button>
+              <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+            </form>
           </div>
         </section>
 
@@ -269,7 +305,7 @@
           </div>
         </section>
 
-        <section class="section section-soft" id="temoignages">
+        <section class="section" id="temoignages">
           <div class="container">
             <div class="section-heading centered">
               <span class="section-line"></span>
@@ -289,79 +325,6 @@
               </button>
             </div>
             <div class="testimonial-card" id="testimonial-card" aria-live="polite"></div>
-          </div>
-        </section>
-
-        <section class="section" id="rsvp">
-          <div class="container rsvp-layout">
-            <div class="rsvp-panel">
-              <div class="section-heading left">
-                <span class="section-line"></span>
-                <p class="eyebrow" data-i18n="rsvpEyebrow">RSVP</p>
-                <h2 data-i18n="rsvpTitle">Confirmez votre présence avec simplicité</h2>
-                <p class="section-intro font-display" data-i18n="rsvpIntro">
-                  Les confirmations sont transmises de façon centralisée aux organisateurs via Google Sheets.
-                </p>
-              </div>
-
-              <div class="feature-list">
-                <div>
-                  <strong data-i18n="rsvpFeatureOneTitle">Pensé pour l’administration</strong>
-                  <p data-i18n="rsvpFeatureOneText">Stockage en base, export CSV/Excel et suivi des invités par foyer.</p>
-                </div>
-                <div>
-                  <strong data-i18n="rsvpFeatureTwoTitle">Parcours mobile fluide</strong>
-                  <p data-i18n="rsvpFeatureTwoText">Grandes zones de saisie, confirmation claire et lecture facile sur smartphone.</p>
-                </div>
-              </div>
-            </div>
-
-            <form class="rsvp-form" id="rsvp-form">
-              <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" hidden />
-              <label>
-                <span data-i18n="formName">Nom complet</span>
-                <input type="text" name="fullName" required data-i18n-placeholder="formNamePlaceholder" />
-              </label>
-
-              <label>
-                <span data-i18n="formPhone">Téléphone</span>
-                <input type="tel" name="phone" required data-i18n-placeholder="formPhonePlaceholder" />
-              </label>
-
-              <label>
-                <span data-i18n="formEmail">Email</span>
-                <input type="email" name="email" required data-i18n-placeholder="formEmailPlaceholder" />
-              </label>
-
-              <label>
-                <span data-i18n="formGuests">Nombre d’accompagnants</span>
-                <input type="number" name="guests" min="0" max="10" value="0" />
-              </label>
-
-              <label>
-                <span data-i18n="formAttendance">Confirmation de présence</span>
-                <select name="attendance" required>
-                  <option value="yes" data-i18n="attendanceYes">Oui, avec joie</option>
-                  <option value="maybe" data-i18n="attendanceMaybe">Je confirme bientôt</option>
-                  <option value="no" data-i18n="attendanceNo">Je ne pourrai pas être présent</option>
-                </select>
-              </label>
-
-              <label>
-                <span data-i18n="formDiet">Restrictions alimentaires</span>
-                <textarea name="diet" rows="3" data-i18n-placeholder="formDietPlaceholder"></textarea>
-              </label>
-
-              <label>
-                <span data-i18n="formMessage">Message aux mariés</span>
-                <textarea name="message" rows="4" data-i18n-placeholder="formMessagePlaceholder"></textarea>
-              </label>
-
-              <button class="button button-primary form-submit" type="submit" data-i18n="formSubmit">
-                Envoyer ma confirmation
-              </button>
-              <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
-            </form>
           </div>
         </section>
 
@@ -390,6 +353,14 @@
                 <p data-i18n="giftOptionTwoText">
                   Possibilité d’ajouter un texte d’accompagnement, des coordonnées bancaires ou un QR code sécurisé.
                 </p>
+              </article>
+              <article class="glass-card">
+                <h3 data-i18n="giftMobileTitle">Mobile Money</h3>
+                <p data-i18n="giftPending">Modalités à confirmer.</p>
+              </article>
+              <article class="glass-card">
+                <h3 data-i18n="giftBankTitle">Coordonnées bancaires</h3>
+                <p data-i18n="giftPending">Modalités à confirmer.</p>
               </article>
             </div>
           </div>
@@ -445,7 +416,7 @@
           </div>
         </section>
 
-        <section class="section section-soft" id="infos">
+        <section class="section" id="infos">
           <div class="container narrow">
             <div class="section-heading centered">
               <span class="section-line"></span>
@@ -459,7 +430,7 @@
           </div>
         </section>
 
-        <section class="section" id="contacts">
+        <section class="section section-soft" id="contacts">
           <div class="container">
             <div class="section-heading centered">
               <span class="section-line"></span>
@@ -471,7 +442,7 @@
             </div>
 
             <div class="contacts-grid" id="contacts-grid"></div>
-            <div class="emergency-banner">
+            <div class="emergency-banner" hidden>
               <div>
                 <strong data-i18n="emergencyTitle">Urgence jour J</strong>
                 <p data-i18n="emergencyText">WhatsApp : +237 696 475 797</p>
