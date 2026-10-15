@@ -2,7 +2,7 @@
 
 Source fournie par l’utilisateur : https://grimage-connect.lovable.app/
 
-Les sept images JPEG ont été récupérées depuis la page rendue le 14 octobre 2026 pour reproduire le design demandé. Elles ne sont pas présentées comme des photos de Carole et Guy Landry. Les remplacer avec `PHOTO_OVERRIDES` dans `script.js` lorsque les photos personnelles sont disponibles.
+Les sept images JPEG ont été récupérées depuis la page rendue le 14 octobre 2026 pour reproduire le design demandé. La couverture `hero.jpg` est maintenant confirmée par le couple comme photo définitive de Carole et Guy Landry. Les six images de galerie restent provisoires et seront remplacées avec `PHOTO_OVERRIDES` dans `script.js` lorsque les photos personnelles seront disponibles.
 
 - `hero.jpg` : `hero-couple-CWzql3u3.jpg`
 - `0116397ed30dfe68.jpg` : `gallery-1-BDlxuhcW.jpg`

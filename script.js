@@ -19,7 +19,7 @@ const state = {
 
 // Add real photo paths here when supplied. Reference images are illustrative.
 const PHOTO_OVERRIDES = {
-  hero: "",
+  hero: "assets/reference/hero.jpg",
   gallery: {},
 };
 const referencePhotos = [

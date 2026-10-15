@@ -22,4 +22,4 @@ Emplacements utilisés par la nouvelle présentation :
 
 Formats recommandés : JPG ou WebP, largeur de 1200 à 2000 px, poids inférieur à 500 Ko par image. Vérifier l’autorisation de publication avant de les ajouter.
 
-Les emplacements non configurés utilisent les photos d’illustration du modèle dans `assets/reference/`. Elles sont signalées comme provisoires dans la page et la lightbox. Le signalement disparaît pour la couverture dès qu’elle est configurée et pour la galerie lorsque ses six images sont configurées.
+La couverture est maintenant confirmée et configurée. Les emplacements de galerie non configurés utilisent encore les photos d’illustration du modèle dans `assets/reference/` ; elles sont signalées comme provisoires dans la page et la lightbox. Le signalement disparaît lorsque les six images de galerie sont configurées.
