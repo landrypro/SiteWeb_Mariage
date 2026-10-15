@@ -84,7 +84,7 @@ const copy = {
     rsvpEyebrow: "RSVP",
     rsvpTitle: "Confirmez votre présence avec simplicité",
     rsvpIntro:
-      "Ce formulaire est conçu pour une future connexion à Supabase ou Firebase. Dans cette démo, la soumission est simulée localement afin de valider l’expérience utilisateur.",
+      "Les confirmations sont transmises de façon centralisée aux organisateurs via Google Sheets.",
     rsvpFeatureOneTitle: "Pensé pour l’administration",
     rsvpFeatureOneText: "Stockage en base, export CSV/Excel et suivi des invités par foyer.",
     rsvpFeatureTwoTitle: "Parcours mobile fluide",
@@ -227,7 +227,7 @@ const copy = {
     rsvpEyebrow: "RSVP",
     rsvpTitle: "Confirm your attendance with ease",
     rsvpIntro:
-      "This form is designed for a future Supabase or Firebase connection. In this demo, submissions are simulated locally to validate the guest experience.",
+      "Confirmations are sent centrally to the organizers through Google Sheets.",
     rsvpFeatureOneTitle: "Built for administration",
     rsvpFeatureOneText: "Database storage, CSV/Excel export, and guest management by household.",
     rsvpFeatureTwoTitle: "Smooth mobile flow",
@@ -325,7 +325,7 @@ const events = [
       fr: "Première étape officielle de notre engagement civil, dans la joie et la simplicité.",
       en: "The official civil step of our union, celebrated with joy and simplicity.",
     },
-    maps: "https://maps.google.com/?q=Mairie+de+Douala",
+    maps: "https://www.google.com/maps/search/?api=1&query=Mairie%20de%20Douala",
   },
   {
     title: { fr: "Bénédiction religieuse", en: "Religious blessing" },
@@ -337,7 +337,7 @@ const events = [
       fr: "Le cœur spirituel de cette journée, vécu dans la reconnaissance envers Dieu.",
       en: "The spiritual heart of the day, lived in gratitude before God.",
     },
-    maps: "https://maps.google.com/?q=Douala+Cameroun",
+    maps: "https://www.google.com/maps/search/?api=1&query=Douala%20Cameroun",
   },
   {
     title: { fr: "Cocktail de célébration", en: "Celebration cocktail" },
@@ -349,7 +349,7 @@ const events = [
       fr: "Un temps convivial pour partager un repas, des sourires et de belles photos en famille.",
       en: "A warm gathering to share food, smiles, and joyful family memories.",
     },
-    maps: "https://maps.google.com/?q=Douala+Cameroun",
+    maps: "https://www.google.com/maps/search/?api=1&query=Douala%20Cameroun",
   },
 ];
 
@@ -841,7 +841,10 @@ function renderGallery() {
           data-gallery-index="${index}"
           data-category="${categoryLabel}"
         >
-          <div class="gallery-preview" style="background:${gradientFrom(item.colors)}"></div>
+          <div
+            class="gallery-preview"
+            style="background-image:${gradientFrom(item.colors)},url('${item.image}');background-size:cover;background-position:center"
+          ></div>
           <span class="card-tag">${categoryLabel}</span>
           <h3>${localized(item.title)}</h3>
           <p>${localized(item.description)}</p>
@@ -984,7 +987,10 @@ function createCalendarFile() {
 function openLightbox(item) {
   const lightbox = document.getElementById("lightbox");
   state.lastFocusedElement = document.activeElement;
-  document.getElementById("lightbox-media").style.background = gradientFrom(item.colors);
+  const media = document.getElementById("lightbox-media");
+  media.style.backgroundImage = `${gradientFrom(item.colors)},url('${item.image}')`;
+  media.style.backgroundSize = "cover";
+  media.style.backgroundPosition = "center";
   document.getElementById("lightbox-category").textContent = localized(
     galleryCategories.find((category) => category.key === item.category)?.label,
   );

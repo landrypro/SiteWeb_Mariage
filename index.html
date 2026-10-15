@@ -62,13 +62,35 @@
             <a href="#accueil" data-i18n="navHome">Accueil</a>
             <a href="#histoire" data-i18n="navStory">Notre histoire</a>
             <a href="#programme" data-i18n="navProgram">Programme</a>
-            <a href="#dress-code">Dress code</a>
-            <a href="#galerie">Galerie</a>
-            <a href="#infos">Infos</a>
+            <a href="#dress-code" data-i18n="navDress">Dress code</a>
+            <a href="#galerie" data-i18n="navGallery">Galerie</a>
+            <a href="#infos" data-i18n="navInfo">Infos</a>
+            <a href="#contacts" data-i18n="navContacts">Contacts</a>
+          </nav>
+
+          <nav class="mobile-nav" id="mobile-nav" aria-label="Navigation mobile" hidden>
+            <a href="#accueil" data-i18n="navHome">Accueil</a>
+            <a href="#histoire" data-i18n="navStory">Notre histoire</a>
+            <a href="#programme" data-i18n="navProgram">Programme</a>
+            <a href="#rsvp" data-i18n="navRsvp">RSVP</a>
+            <a href="#dress-code" data-i18n="navDress">Dress code</a>
+            <a href="#galerie" data-i18n="navGallery">Galerie</a>
+            <a href="#infos" data-i18n="navInfo">Infos</a>
             <a href="#contacts" data-i18n="navContacts">Contacts</a>
           </nav>
 
           <div class="header-actions">
+            <button
+              class="header-icon mobile-menu-toggle"
+              id="mobile-menu-toggle"
+              type="button"
+              aria-expanded="false"
+              aria-controls="mobile-nav"
+              aria-label="Ouvrir le menu"
+              data-i18n-aria-label="menuOpen"
+            >
+              <span id="mobile-menu-label" data-i18n="menuLabel">Menu</span>
+            </button>
             <button
               class="header-pill"
               id="language-toggle"
@@ -132,7 +154,7 @@
               <h2 class="sr-only" id="countdown-title" data-i18n="countdownTitle">
                 Chaque jour nous rapproche de cette alliance
               </h2>
-              <div class="countdown-grid" role="timer" aria-live="polite">
+              <div class="countdown-grid" role="timer" aria-live="off" aria-atomic="true">
                 <div class="countdown-item">
                   <strong id="days">000</strong>
                   <span data-i18n="countdownDays">Jours</span>
@@ -150,6 +172,7 @@
                   <span data-i18n="countdownSeconds">Secondes</span>
                 </div>
               </div>
+              <p class="sr-only" id="countdown-live-status" role="status" aria-live="polite"></p>
             </div>
 
             <div class="hero-actions">
@@ -277,7 +300,7 @@
                 <p class="eyebrow" data-i18n="rsvpEyebrow">RSVP</p>
                 <h2 data-i18n="rsvpTitle">Confirmez votre présence avec simplicité</h2>
                 <p class="section-intro font-display" data-i18n="rsvpIntro">
-                  Ce formulaire est conçu pour une future connexion à Supabase ou Firebase. Dans cette démo, la soumission est simulée localement afin de valider l’expérience utilisateur.
+                  Les confirmations sont transmises de façon centralisée aux organisateurs via Google Sheets.
                 </p>
               </div>
 
@@ -395,7 +418,7 @@
                   </p>
                   <a
                     class="button button-secondary"
-                    href="https://maps.google.com/?q=Douala,Cameroun"
+                    href="https://www.google.com/maps/search/?api=1&amp;query=Douala%2C%20Cameroun"
                     target="_blank"
                     rel="noreferrer"
                     data-i18n="travelMapButton"
@@ -495,7 +518,14 @@
 
     <div class="lightbox" id="lightbox" hidden>
       <div class="lightbox-backdrop" id="lightbox-close"></div>
-      <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
+      <div
+        class="lightbox-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="lightbox-title"
+        aria-describedby="lightbox-description"
+        tabindex="-1"
+      >
         <button class="header-icon lightbox-dismiss" type="button" id="lightbox-dismiss" aria-label="Fermer">
           ×
         </button>

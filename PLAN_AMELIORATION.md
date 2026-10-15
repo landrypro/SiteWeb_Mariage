@@ -73,12 +73,14 @@ Utiliser Google Sheets avec Google Apps Script. Le dossier `google-apps-script/`
 
 **Echeance : 22 octobre 2026**
 
-- [ ] Ajouter un menu mobile ou un bouton de navigation compact.
-- [ ] Remplacer le visuel principal et les cartes de galerie par de vraies photos optimisees pour le Web.
+- [x] Ajouter un menu mobile ou un bouton de navigation compact.
+- [ ] Remplacer le visuel principal et les cartes de galerie par de vraies photos optimisees pour le Web. Les emplacements sont prets dans `assets/photos/`.
 - [ ] Completer FAQ, transports, hotels et contacts avec des informations exploitables.
-- [ ] Corriger les liens WhatsApp, email, Instagram et Facebook.
-- [ ] Adapter le calendrier a la date, aux horaires et au fuseau reel de la ceremonie.
-- [ ] Retirer les annonces excessives du compte a rebours pour les lecteurs d ecran et gerer le focus dans la lightbox.
+- [ ] Corriger les liens WhatsApp, email, Instagram et Facebook. WhatsApp est finalise ; email et reseaux sociaux restent a confirmer.
+- [x] Adapter le calendrier a la date, aux horaires et au fuseau reel de la ceremonie.
+- [x] Retirer les annonces excessives du compte a rebours pour les lecteurs d ecran et gerer le focus dans la lightbox.
+
+Les liens Google Maps utilisent actuellement des recherches generiques sur Douala. Ils devront etre remplaces par les adresses exactes des lieux des que celles-ci seront fournies.
 
 ## Phase 4 Publication et partage
 
