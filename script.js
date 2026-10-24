@@ -152,10 +152,10 @@ const copy = {
     travelIntro:
       "Pour nos invités venant de l’extérieur.",
     travelMapTag: "Carte interactive",
-    travelMapTitle: "Repérer rapidement les lieux clés",
+    travelMapTitle: "Lieu du cocktail de célébration",
     travelMapText:
-      "Ajoutez ici Google Maps ou une carte embarquée avec l’église, la mairie, le lieu du cocktail et les hôtels recommandés.",
-    travelMapButton: "Ouvrir Google Maps",
+      "OMAJ, Boulevard Fadil, Douala, Cameroun.",
+    travelMapButton: "Voir OMAJ sur Google Maps",
     travelTipsTitle: "Conseils transport",
     travelWhatsappButton: "Demander de l’aide sur WhatsApp",
     contactsEyebrow: "Contacts utiles",
@@ -305,10 +305,10 @@ const copy = {
     travelIntro:
       "For our guests travelling from afar.",
     travelMapTag: "Interactive map",
-    travelMapTitle: "Quickly locate key places",
+    travelMapTitle: "Celebration cocktail venue",
     travelMapText:
-      "Add Google Maps or an embedded map with the church, city hall, cocktail venue, and recommended hotels.",
-    travelMapButton: "Open Google Maps",
+      "OMAJ, Boulevard Fadil, Douala, Cameroon.",
+    travelMapButton: "View OMAJ on Google Maps",
     travelTipsTitle: "Transport tips",
     travelWhatsappButton: "Ask for help on WhatsApp",
     contactsEyebrow: "Helpful contacts",
@@ -377,13 +377,14 @@ const events = [
     title: { fr: "Cocktail de célébration", en: "Celebration cocktail" },
     date: { fr: "Date : 21 Novembre 2026", en: "Date: November 21, 2026" },
     time: { fr: "Heure : à compléter", en: "Time: to be completed" },
-    venue: { fr: "Lieu : à compléter", en: "Venue: to be completed" },
-    address: { fr: "Adresse : à compléter", en: "Address: to be completed" },
+    venue: { fr: "Lieu : OMAJ", en: "Venue: OMAJ" },
+    address: { fr: "Adresse : Boulevard Fadil, Douala, Cameroun", en: "Address: Boulevard Fadil, Douala, Cameroon" },
+    showAddress: true,
     notes: {
       fr: "Un temps convivial pour partager un repas, des sourires et de belles photos en famille.",
       en: "A warm gathering to share food, smiles, and joyful family memories.",
     },
-    maps: "https://www.google.com/maps/search/?api=1&query=Douala%20Cameroun",
+    maps: "https://maps.app.goo.gl/b6bGTdXK2MFqE2Df6",
   },
 ];
 
@@ -788,7 +789,7 @@ function renderProgram() {
           <span class="program-number" aria-hidden="true">${String(index + 1).padStart(2, "0")}</span>
           <h3>${localized(event.title)}</h3>
           <dl class="program-meta">
-            ${[event.date, event.time, event.venue].map(value => {
+            ${[event.date, event.time, event.venue, ...(event.showAddress ? [event.address] : [])].map(value => {
               const [label, ...parts] = localized(value).split(":");
               return `<div><dt>${label.trim()}</dt><dd>${parts.join(":").trim()}</dd></div>`;
             }).join("")}
