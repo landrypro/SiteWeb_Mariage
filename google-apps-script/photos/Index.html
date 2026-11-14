@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <base target="_top" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Partager vos photos — Carole & Guy Landry</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; background: #f7f2eb; color: #25323a; font: 400 1rem/1.55 "Nunito Sans", sans-serif; }
+      main { width: min(100% - 2rem, 680px); margin: 0 auto; padding: 2.5rem 0 4rem; }
+      .brand { font: 600 1.7rem "Cormorant Garamond", serif; text-decoration: none; color: inherit; }
+      .brand span { color: #b86a43; }
+      h1 { font: 600 clamp(2.8rem, 8vw, 4.8rem)/.98 "Cormorant Garamond", serif; margin: 2.2rem 0 1rem; }
+      .eyebrow { color: #a45d3a; font-size: .8rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+      .card { margin-top: 1.7rem; padding: clamp(1.2rem, 4vw, 2rem); background: #fffdf9; border: 1px solid #e2d9ca; border-radius: 1.1rem; box-shadow: 0 16px 38px #7d634119; }
+      .picker { display: block; border: 2px dashed #9bbdc5; border-radius: .8rem; padding: 1.8rem 1rem; text-align: center; cursor: pointer; }
+      .picker:hover, .picker:focus-within { background: #f0f8fa; }
+      .picker input { display: block; margin: .7rem auto 0; max-width: 100%; }
+      .hint, .privacy { color: #5b6670; font-size: .9rem; }
+      .button { display: inline-block; width: 100%; margin-top: 1rem; padding: .85rem 1.2rem; border: 0; border-radius: 3rem; background: #ad623d; color: white; text-align: center; font: 700 1rem "Nunito Sans", sans-serif; cursor: pointer; }
+      .button:disabled { background: #8d9699; cursor: not-allowed; }
+      .button:hover:not(:disabled) { background: #874826; }
+      .item { display: flex; justify-content: space-between; align-items: center; gap: 1rem; border-top: 1px solid #e7e0d6; padding: .8rem 0; }
+      .item span { overflow-wrap: anywhere; }
+      .item button { background: transparent; border: 1px solid #ad623d; border-radius: 1rem; color: #8b4b2a; padding: .3rem .65rem; cursor: pointer; }
+      .status { min-height: 1.5em; margin-top: 1rem; font-weight: 700; }
+      .error { color: #a43d34; } .success { color: #326a4a; }
+      [hidden] { display: none !important; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a class="brand" href="https://caroleguypourlavie.gaiusconsulting.online/photos/">Carole <span>&amp;</span> Guy Landry</a>
+      <p class="eyebrow">21 novembre 2026 · Maison OMAJ</p>
+      <h1>Partagez vos photos</h1>
+      <p>Choisissez les images prises pendant le mariage. Elles seront remises aux mariés dans leur dossier privé.</p>
+      <div class="card">
+        <p id="availability" class="status" role="status">Vérification de l’ouverture du dépôt…</p>
+        <form id="upload-form" hidden>
+          <label class="picker">Choisir jusqu’à 5 photos
+            <input id="photos" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/avif,.heic" multiple required />
+          </label>
+          <p class="hint">10 Mo maximum par photo. JPEG, PNG, WebP, HEIC ou AVIF.</p>
+          <div id="file-list" aria-live="polite"></div>
+          <button id="send-button" class="button" type="submit" disabled>Envoyer les photos</button>
+        </form>
+        <p id="result" class="status" role="status" aria-live="polite"></p>
+      </div>
+      <p class="privacy">Les photos ne seront pas publiées automatiquement sur le site. N’envoyez que des images que vous souhaitez partager avec Carole et Guy Landry.</p>
+    </main>
+    <script>
+      const MAX_FILES = 5;
+      const MAX_BYTES = 10 * 1024 * 1024;
+      const input = document.getElementById("photos");
+      const list = document.getElementById("file-list");
+      const result = document.getElementById("result");
+      const sendButton = document.getElementById("send-button");
+      let entries = [];
+      let sending = false;
+
+      function newId() {
+        if (crypto.randomUUID) return crypto.randomUUID();
+        return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (letter) => {
+          const value = crypto.getRandomValues(new Uint8Array(1))[0] % 16;
+          return (letter === "x" ? value : (value & 3) | 8).toString(16);
+        });
+      }
+
+      function renderList() {
+        list.replaceChildren();
+        entries.forEach((entry, index) => {
+          const row = document.createElement("div");
+          row.className = "item";
+          const label = document.createElement("span");
+          label.textContent = entry.file.name + " — " + entry.status;
+          row.append(label);
+          if (!sending && entry.status !== "Reçue") {
+            const remove = document.createElement("button");
+            remove.type = "button";
+            remove.textContent = "Retirer";
+            remove.setAttribute("aria-label", "Retirer " + entry.file.name);
+            remove.addEventListener("click", () => {
+              entries.splice(index, 1);
+              renderList();
+            });
+            row.append(remove);
+          }
+          list.append(row);
+        });
+        sendButton.disabled = sending || !entries.some((entry) => entry.status !== "Reçue");
+      }
+
+      input.addEventListener("change", () => {
+        result.textContent = "";
+        const files = Array.from(input.files);
+        if (files.length > MAX_FILES) {
+          result.textContent = "Choisissez 5 photos maximum à la fois.";
+          result.className = "status error";
+          input.value = "";
+          return;
+        }
+        const oversized = files.find((file) => file.size === 0 || file.size > MAX_BYTES);
+        if (oversized) {
+          result.textContent = "Une photo est vide ou dépasse 10 Mo : " + oversized.name;
+          result.className = "status error";
+          input.value = "";
+          return;
+        }
+        entries = files.map((file) => ({ file, id: newId(), status: "Prête" }));
+        renderList();
+      });
+
+      function readBase64(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(String(reader.result).split(",")[1] || "");
+          reader.onerror = () => reject(new Error("Lecture impossible : " + file.name));
+          reader.readAsDataURL(file);
+        });
+      }
+
+      function savePhoto(entry, data) {
+        return new Promise((resolve, reject) => {
+          google.script.run
+            .withSuccessHandler((response) => response && response.ok ? resolve() : reject(new Error("Réponse invalide du serveur.")))
+            .withFailureHandler(reject)
+            .uploadPhoto({ id: entry.id, data });
+        });
+      }
+
+      document.getElementById("upload-form").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (sending) return;
+        sending = true;
+        input.disabled = true;
+        result.textContent = "Envoi en cours. Gardez cette page ouverte.";
+        result.className = "status";
+        renderList();
+        for (const entry of entries) {
+          if (entry.status === "Reçue") continue;
+          entry.status = "Envoi en cours";
+          renderList();
+          try {
+            const data = await readBase64(entry.file);
+            await savePhoto(entry, data);
+            entry.status = "Reçue";
+          } catch (error) {
+            entry.status = "Échec — réessayer";
+          }
+          renderList();
+        }
+        sending = false;
+        input.disabled = false;
+        const failed = entries.filter((entry) => entry.status !== "Reçue").length;
+        result.textContent = failed
+          ? failed + " photo(s) non reçue(s). Appuyez sur « Envoyer les photos » pour réessayer."
+          : "Toutes vos photos ont été reçues. Merci ! Vous pouvez en choisir d’autres.";
+        result.className = failed ? "status error" : "status success";
+        if (!failed) input.value = "";
+        renderList();
+      });
+
+      google.script.run.withSuccessHandler((status) => {
+        const availability = document.getElementById("availability");
+        availability.textContent = status && status.open
+          ? "Le dépôt des photos est ouvert."
+          : "Le dépôt des photos n’est pas encore ouvert.";
+        if (status && status.open) document.getElementById("upload-form").hidden = false;
+      }).withFailureHandler(() => {
+        document.getElementById("availability").textContent = "Impossible de vérifier le service. Réessayez plus tard.";
+      }).getUploadStatus();
+    </script>
+  </body>
+</html>

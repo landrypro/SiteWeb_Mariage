@@ -19,6 +19,7 @@ Site internet de mariage chrétien pour **Carole & Guy Landry**.
 - Dress code
 - Formulaire RSVP
 - Galerie filtrable avec lightbox
+- Partage des photos des invités par QR code unique (configuration Google Apps Script requise)
 - Témoignages
 - Cadeaux et soutien
 - Hébergement et voyage
@@ -28,6 +29,8 @@ Site internet de mariage chrétien pour **Carole & Guy Landry**.
 ## Mise en ligne
 
 Ce livrable peut être déployé sur GitHub Pages, Vercel ou Cloudflare Pages. Le RSVP peut être relié à Google Sheets via le script présent dans `google-apps-script/`.
+
+Le dépôt privé des photos des invités se prépare avec le projet séparé décrit dans `google-apps-script/photos/README.md`. Le QR code universel pointe vers `/photos/` sur le domaine du site.
 
 ## Refonte visuelle du 14 octobre 2026
 

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#f7f2eb" />
+    <title>Partager vos photos — Carole & Guy Landry</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="photos.css" />
+  </head>
+  <body>
+    <header class="header">
+      <a class="brand" href="../">Carole <span>&amp;</span> Guy Landry</a>
+      <div class="header-actions">
+        <a href="../#programme" data-i18n="back">Retour au site</a>
+        <button id="language-toggle" type="button" aria-label="Switch language">EN</button>
+      </div>
+    </header>
+    <main class="layout">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow" data-i18n="eyebrow">21 novembre 2026 · Maison OMAJ</p>
+        <h1 id="page-title" data-i18n="title">Partagez vos photos de cette journée</h1>
+        <p class="lead" data-i18n="intro">Vos souvenirs, vus à travers vos yeux, sont un cadeau précieux. Choisissez les photos que vous souhaitez transmettre à Carole et Guy Landry.</p>
+        <div class="card">
+          <ol>
+            <li data-i18n="stepOne">Choisissez jusqu’à 5 photos à la fois.</li>
+            <li data-i18n="stepTwo">Suivez l’envoi de chaque photo.</li>
+            <li data-i18n="stepThree">Retrouvez une confirmation une fois les photos reçues.</li>
+          </ol>
+          <a id="upload-link" class="button" href="#" hidden data-i18n="button">Déposer mes photos</a>
+          <p id="setup-status" class="status" role="status" data-i18n="pending">Le dépôt des photos sera ouvert prochainement.</p>
+        </div>
+        <p class="privacy" data-i18n="privacy">Les photos sont envoyées dans un dossier privé des mariés. Elles ne sont pas publiées automatiquement sur le site.</p>
+      </section>
+      <aside class="art" aria-hidden="true"><span>♥</span><p>Carole<br /><em>&amp;</em><br />Guy Landry</p></aside>
+    </main>
+    <script src="config.js"></script>
+    <script src="photos.js"></script>
+  </body>
+</html>
